@@ -21,7 +21,7 @@
             <i class="fas fa-envelope mr-3"></i>
             Mensajes
         </a>
-        <a href="" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="{{ route('usersIndex') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fas fa-user mr-3"></i>
             Usuarios
         </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\gallery;
 use App\Models\state;
 use App\Models\Multimedia;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,10 +21,12 @@ class GalleryController extends Controller
     public function imageRegister(){
         $gallery = gallery::all();
         $state = state::all();
-        return view('admin.content.registerImage', compact('gallery', 'state'));
+        $user = User::role('artista')->get();
+        return view('admin.content.registerImage', compact('gallery', 'state', 'user'));
     }
     public function galleryRegister(){
         $state = state::all();
+        
         return view('admin.content.registerGallery', compact('state'));
     }
     public function galleryStore(Request $request){

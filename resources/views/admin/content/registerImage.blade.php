@@ -53,6 +53,14 @@
                                     </select>
                                 </div>
                                 <div class="mb-4">
+                                    <label for="user_id" class="block text-sm font-medium text-gray-700">Artista</label>
+                                    <select id="user_id" name="user_id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                        @foreach ($user as $users)
+                                            <option value="{{ $users->id }}">{{ $users->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-4">
                                     <label for="status_id" class="block text-sm font-medium text-gray-700">Estado</label>
                                     <select id="status_id" name="status_id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                                         @foreach ($state as $states)

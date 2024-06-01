@@ -3,13 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\UserController;
 
+//rutas inicio
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/welcome', [LandingController::class, 'welcome'])->name('welcome');
+
+//rutas galeria
 Route::get('/gallery', [LandingController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/{id}', [LandingController::class, 'viewGallery'])->name('viewGallery');
+
+//rutas artistas
+Route::get('/artists', [LandingController::class, 'viewartists'])->name('artists');
 
 Route::middleware([
     'auth:sanctum',
@@ -26,4 +33,11 @@ Route::middleware([
     Route::get('/galleryRegister', [GalleryController::class, 'galleryRegister'])->name('galleryRegister');
     Route::post('/galleryStore', [GalleryController::class, 'galleryStore'])->name('galleryStore');
     Route::post('/imageStore', [GalleryController::class, 'imageStore'])->name('imageStore');
+
+    //rutas de usuarios
+    Route::get('/users', [UserController::class, 'index'])->name('usersIndex');
+    Route::post('/users/make-artist/{id}', [UserController::class, 'makeArtist'])->name('usersMakeArtist');
+    Route::post('/users/make-user/{id}', [UserController::class, 'makeUser'])->name('usersMakeUser');
+
+    
 });

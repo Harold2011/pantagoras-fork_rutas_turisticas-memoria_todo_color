@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\gallery;
 use App\Models\Multimedia;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -19,5 +21,10 @@ class LandingController extends Controller
     {
         $multimedia = Multimedia::where('gallery_id', $id)->with('user')->get();
        return view('viewGallery', compact('multimedia'));
+    }
+    public function viewartists()
+    {
+        $user = User::role('artista')->get();
+       return view('artists', compact('user'));
     }
 }

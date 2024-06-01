@@ -24,12 +24,29 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            'profile_photo' => ['nullable', 'image', 'max:2048'],
+            'instagram' => ['nullable', 'string', 'max:255'],
+            'facebook' => ['nullable', 'string', 'max:255'],
+            'youtube' => ['nullable', 'string', 'max:255'],
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'profile_photo_path' => $input['profile_photo'],
+            'instagram' => $input['instagram'],
+            'facebook' => $input['facebook'],
+            'youtube' => $input['youtube'],
         ]);
+        if (isset($input['profile_photo'])) {
+            $user->profile_photo_path = $input['profile_photo']->store('profile-photos', 'public');
+            $user->save();
+        }
+        
+        $user->roles()->attach(2);
+
+        return $user;
     }
 }
+
