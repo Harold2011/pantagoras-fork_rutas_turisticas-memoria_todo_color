@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\StoreController;
 //rutas inicio
 Route::get('/', function () {
     return view('welcome');
@@ -39,5 +39,7 @@ Route::middleware([
     Route::post('/users/make-artist/{id}', [UserController::class, 'makeArtist'])->name('usersMakeArtist');
     Route::post('/users/make-user/{id}', [UserController::class, 'makeUser'])->name('usersMakeUser');
 
+    //rutas tienda
+    Route::get('/storeNav', [StoreController::class, 'storeNav'])->name('storeNav');
     
 });

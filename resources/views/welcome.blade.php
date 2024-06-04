@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="h-screen overflow-hidden">
-    <div class="relative w-full h-full bg-no-repeat bg-cover bg-center bg-shadow" style="background-image: url('{{ asset('storage/img/background.jpg') }}');">
+    <div class="relative w-full h-full bg-no-repeat bg-cover bg-center bg-shadow" style="background-image: url('{{ asset('storage/img/background.gif') }}');">
         <div class="content">
             <header class="lg:px-16 px-4 flex flex-wrap items-center py-4">
                 <div class="flex-1 flex justify-between items-center">

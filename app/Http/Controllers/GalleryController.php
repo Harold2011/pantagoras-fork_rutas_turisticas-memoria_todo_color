@@ -60,6 +60,7 @@ class GalleryController extends Controller
         'name' => 'required|string|max:100',
         'description' => 'required|string|max:200',
         'url' => 'required|image',
+        'user_id' => 'required|exists:users,id',
         'gallery_id' => 'required|exists:gallery,id',
         'status_id' => 'required|exists:state,id'
     ]);
@@ -75,7 +76,7 @@ class GalleryController extends Controller
         'description' => $request->description,
         'url' => $imagePath,
         'gallery_id' => $request->gallery_id,
-        'user_id' => Auth::id(),
+        'user_id' => $request->user_id,
         'status_id' => $request->status_id,
     ]);
 
