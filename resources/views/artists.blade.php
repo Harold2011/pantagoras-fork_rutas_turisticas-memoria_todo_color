@@ -48,7 +48,7 @@
                                 <p class="mb-4 text-gray-100">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
                                 <span class="inline-flex">
                                     @if(!empty($users->instagram))
-                                        <a href="{{ $users->instagram }}" class="text-gray-100">
+                                        <a href="{{ $users->instagram }}" target="_blank" class="text-gray-100">
                                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="currentColor" stroke-width="1.5"/>
@@ -56,14 +56,14 @@
                                         </a>
                                     @endif
                                     @if(!empty($users->facebook))
-                                        <a href="{{ $users->facebook }}" class="text-gray-100">
+                                        <a href="{{ $users->facebook }}" target="_blank" class="text-gray-100">
                                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                                                 <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                                             </svg>
                                         </a>
                                     @endif
                                     @if(!empty($users->youtube))
-                                        <a href="{{ $users->youtube}}" class="ml-2 text-gray-100">
+                                        <a href="{{ $users->youtube}}" target="_blank" class="ml-2 text-gray-100">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-youtube">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z" />
