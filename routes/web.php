@@ -41,5 +41,7 @@ Route::middleware([
 
     //rutas tienda
     Route::get('/storeNav', [StoreController::class, 'storeNav'])->name('storeNav');
+    Route::get('/store', [StoreController::class, 'store'])->name('store');
+    Route::get('/registerProduct', [StoreController::class, 'registerProduct'])->name('registerProduct');
     
 });
