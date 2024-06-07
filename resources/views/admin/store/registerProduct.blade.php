@@ -29,7 +29,7 @@
                     <div class="bg-white overflow-auto w-full gap-4 p-10">
                         <div class="mx-auto my-10 bg-white w-full p-8 rounded-lg shadow-lg">
                             <h2 class="text-2xl font-bold mb-6">Formulario de Registro</h2>
-                            <form action="{{ route('galleryStore') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('productStore') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-4">
                                     <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
@@ -68,7 +68,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <button type="submit" class="w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="submit" class="p-5 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Registrar
                                     </button>
                                 </div>

@@ -38,22 +38,22 @@
                                 <tr>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Descripción</th>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Estado</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">precio</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
-                                
-                                    <tr>
-                                        <td class="w-1/3 text-left py-3 px-4"></td>
-                                        <td class="w-1/3 text-left py-3 px-4"></td>
-                                        <td class="text-left py-3 px-4"></td>
-                                        <td class="text-left py-3 px-4">
-                                            editar
-                                            eliminar
-                                        </td>
-                                    </tr>
-                                
+                            @foreach($products as $product)
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">{{ $product->name }}</td>
+                                    <td class="w-1/3 text-left py-3 px-4">{{ $product->description }}</td>
+                                    <td class="text-left py-3 px-4">{{ $product->price }}</td>
+                                    <td class="text-left py-3 px-4">
+                                        editar
+                                        eliminar
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

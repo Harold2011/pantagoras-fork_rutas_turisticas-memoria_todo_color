@@ -31,18 +31,25 @@
                 </div>
             </header>
             <main>
+                <div class="flex flex-col items-center justify-center w-full mb-20">
+                    <h1 class="text-2xl font-medium title-font mb-4 text-gray-100">Conose San Carlos</h1>
+                    <video class="rounded" width="640" height="480" autoplay muted loop>
+                        <source src="{{ asset('storage/img/SAN_CARLOS.mp4')}}" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                    @foreach ($gallery as $gallerys)
-                      <a href="{{ route('viewGallery', $gallerys->id)}}">
-                        <div class="relative rounded overflow-hidden fixed-size shadow-lg bg-white">
-                            <img src="{{ asset('storage/'.$gallerys->url) }}" alt="Gallery Image">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
-                                <p class="text-2xl">{{ $gallerys->name }}</p>
-                                <p class="text-lg">{{ $gallerys->description }}</p>
+                        @foreach ($gallery as $gallerys)
+                        <a href="{{ route('viewGallery', $gallerys->id)}}">
+                            <div class="relative rounded overflow-hidden fixed-size shadow-lg bg-white">
+                                <img src="{{ asset('storage/'.$gallerys->url) }}" alt="Gallery Image">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
+                                    <p class="text-2xl">{{ $gallerys->name }}</p>
+                                    <p class="text-lg">{{ $gallerys->description }}</p>
+                                </div>
                             </div>
-                        </div>
-                      </a>
-                    @endforeach
+                        </a>
+                        @endforeach
                 </div>
             </main> 
         </div>

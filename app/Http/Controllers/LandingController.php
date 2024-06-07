@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\gallery;
 use App\Models\Multimedia;
 use App\Models\User;
+use App\Models\products;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -26,5 +27,9 @@ class LandingController extends Controller
     {
         $user = User::role('artista')->get();
        return view('artists', compact('user'));
+    }
+    public function store(){
+        $products = products::all();
+        return view('store', compact('products'));
     }
 }

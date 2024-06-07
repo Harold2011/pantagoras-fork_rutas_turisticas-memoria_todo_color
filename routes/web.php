@@ -5,6 +5,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoreController;
+
 //rutas inicio
 Route::get('/', function () {
     return view('welcome');
@@ -17,6 +18,9 @@ Route::get('/gallery/{id}', [LandingController::class, 'viewGallery'])->name('vi
 
 //rutas artistas
 Route::get('/artists', [LandingController::class, 'viewartists'])->name('artists');
+
+//ruta tienda
+Route::get('/storeUser', [LandingController::class, 'store'])->name('storeUser');
 
 Route::middleware([
     'auth:sanctum',
@@ -43,5 +47,6 @@ Route::middleware([
     Route::get('/storeNav', [StoreController::class, 'storeNav'])->name('storeNav');
     Route::get('/store', [StoreController::class, 'store'])->name('store');
     Route::get('/registerProduct', [StoreController::class, 'registerProduct'])->name('registerProduct');
+    Route::post('/productStore', [StoreController::class, 'productStore'])->name('productStore');
     
 });

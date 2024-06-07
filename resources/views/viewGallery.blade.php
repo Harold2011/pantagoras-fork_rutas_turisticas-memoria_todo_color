@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     @vite('resources/css/app.css')
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
         .background-fixed {
             background-image: url('{{ asset('storage/img/fondo.png') }}');
             background-size: cover;
@@ -48,10 +50,14 @@
                 </div>
             </header>
             <main>
+            <div class="overflow-auto grid grid-cols-2 gap-4 p-10">
+                        <a href="{{ route('gallery')}}"><button class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <i class="fas fa-arrow-alt-circle-left mr-3"></i> Regresar
+                        </button></a>
+                    </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                     @foreach ($multimedia as $media)
-                        <div class="relative rounded overflow-hidden shadow-lg bg-white cursor-pointer image-container"
-                             @click="modalImage = '{{ asset('storage/'.$media->url) }}'; showModal = true">
+                        <div class="relative rounded overflow-hidden shadow-lg bg-white cursor-pointer image-container" @click="modalImage = '{{ asset('storage/'.$media->url) }}'; showModal = true">
                             <img src="{{ asset('storage/'.$media->url) }}" alt="Multimedia Image" class="w-full h-64 object-cover">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
                                 <p class="text-2xl">{{ $media->name }}</p>
@@ -64,7 +70,6 @@
             </main>
         </div>
     </div>
-
     <!-- Modal -->
     <div x-show="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
         <div class="bg-white p-4 rounded-lg shadow-lg max-w-3xl w-full modal-content">
@@ -72,5 +77,7 @@
             <img :src="modalImage" alt="Modal Image" class="modal-image mt-4">
         </div>
     </div>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 </body>
 </html>
