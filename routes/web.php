@@ -16,6 +16,7 @@ Route::get('/welcome', [LandingController::class, 'welcome'])->name('welcome');
 Route::get('/gallery', [LandingController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/{id}', [LandingController::class, 'viewGallery'])->name('viewGallery');
 
+
 //rutas artistas
 Route::get('/artists', [LandingController::class, 'viewartists'])->name('artists');
 
@@ -37,6 +38,12 @@ Route::middleware([
     Route::get('/galleryRegister', [GalleryController::class, 'galleryRegister'])->name('galleryRegister');
     Route::post('/galleryStore', [GalleryController::class, 'galleryStore'])->name('galleryStore');
     Route::post('/imageStore', [GalleryController::class, 'imageStore'])->name('imageStore');
+    Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('galleryEdit');
+    Route::post('/gallery/update/{id}', [GalleryController::class, 'update'])->name('galleryUpdate');
+    Route::delete('/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('galleryDelete');
+    Route::post('/gallery/toggle-status/{id}', [GalleryController::class, 'toggleStatus'])->name('galleryToggleStatus');
+
+
 
     //rutas de usuarios
     Route::get('/users', [UserController::class, 'index'])->name('usersIndex');

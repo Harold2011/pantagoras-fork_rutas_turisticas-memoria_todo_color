@@ -45,18 +45,34 @@
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
-                                @foreach($gallery as $gallerys)
-                                    <tr>
-                                        <td class="w-1/3 text-left py-3 px-4">{{ $gallerys->name }}</td>
-                                        <td class="w-1/3 text-left py-3 px-4">{{ $gallerys->description }}</td>
-                                        <td class="text-left py-3 px-4">{{ $gallerys->state }}</td>
-                                        <td class="text-left py-3 px-4">
-                                            editar
-                                            eliminar
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            @foreach($gallery as $gallerys)
+                                <tr>
+                                    <td class="w-1/3 text-left py-3 px-4">{{ $gallerys->name }}</td>
+                                    <td class="w-1/3 text-left py-3 px-4">{{ $gallerys->description }}</td>
+                                    <td class="text-left py-3 px-4">{{ $gallerys->state->name }}</td>
+                                    <td class="text-left py-3 px-4">
+                                        <a href="{{ route('galleryEdit', $gallerys->id) }}">
+                                            <button>
+                                                <i class="fas fa-pen mr-3"></i>
+                                            </button>
+                                        </a>
+                                        <form action="{{ route('galleryDelete', $gallerys->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
+                                                <i class="fas fa-trash mr-3"></i>
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('galleryToggleStatus', $gallerys->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit">
+                                                <i class="fas fa-toggle-on mr-3"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                         </table>
                         
                         <table class="min-w-full bg-white">
@@ -75,8 +91,9 @@
                                         <td class="w-1/3 text-left py-3 px-4">{{ $multimedias->description }}</td>
                                         <td class="text-left py-3 px-4">{{ $multimedias->state }}</td>
                                         <td class="text-left py-3 px-4">
-                                                editar
-                                                eliminar
+                                            <i class="fas fa-pen mr-3"></i>
+                                            <i class="fas fa-trash mr-3"></i>
+                                            <i class="fas fa-toggle-on mr-3"></i>
                                         </td>
                                     </tr>
                                 @endforeach
