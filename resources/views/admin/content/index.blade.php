@@ -49,7 +49,13 @@
                                 <tr>
                                     <td class="w-1/3 text-left py-3 px-4">{{ $gallerys->name }}</td>
                                     <td class="w-1/3 text-left py-3 px-4">{{ $gallerys->description }}</td>
-                                    <td class="text-left py-3 px-4">{{ $gallerys->state->name }}</td>
+                                    <td class="text-left py-3 px-4">
+                                        @if($gallerys->status_id == 1)
+                                            <span class="bg-green-500 text-white py-1 px-3 rounded-full text-xs">Activo</span>
+                                        @else
+                                            <span class="bg-red-500 text-white py-1 px-3 rounded-full text-xs">Inactivo</span>
+                                        @endif
+                                    </td>
                                     <td class="text-left py-3 px-4">
                                         <a href="{{ route('galleryEdit', $gallerys->id) }}">
                                             <button>
@@ -88,7 +94,13 @@
                                     <tr>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $multimedias->name }}</td>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $multimedias->description }}</td>
-                                        <td class="text-left py-3 px-4">{{ $multimedias->status_id == 1 ? 'Activo' : 'Inactivo' }}</td>
+                                        <td class="text-left py-3 px-4">
+                                            @if($multimedias->status_id == 1)
+                                            <span class="bg-green-500 text-white py-1 px-3 rounded-full text-xs">Activo</span>
+                                            @else
+                                                <span class="bg-red-500 text-white py-1 px-3 rounded-full text-xs">Inactivo</span>
+                                            @endif
+                                        </td>
                                         <td class="text-left py-3 px-4">
                                             <a href="{{ route('editImage', $multimedias->id) }}"><i class="fas fa-pen mr-3"></i></a>
                                             <form action="{{ route('destroyImage', $multimedias->id) }}" method="POST" style="display:inline-block;">

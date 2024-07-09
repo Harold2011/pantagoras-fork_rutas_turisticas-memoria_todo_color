@@ -32,30 +32,51 @@
                         <h1 class="text-3xl text-black pb-6">Productos</h1>
                     </div>
                     <div class="bg-white overflow-auto grid grid-cols-1 gap-4 p-10">
-                        
-                        <table class="min-w-full bg-white">
+                        <table class="min-w-full bg-white mt-4">
                             <thead class="bg-gray-800 text-white">
                                 <tr>
-                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
-                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Descripción</th>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">precio</th>
+                                    <th class="w-1/4 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
+                                    <th class="w-1/4 text-left py-3 px-4 uppercase font-semibold text-sm">Descripción</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Precio</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Estado</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
-                            @foreach($products as $product)
+                                @foreach($products as $product)
                                 <tr>
-                                    <td class="w-1/3 text-left py-3 px-4">{{ $product->name }}</td>
-                                    <td class="w-1/3 text-left py-3 px-4">{{ $product->description }}</td>
-                                    <td class="text-left py-3 px-4">{{ $product->price }}</td>
+                                    <td class="w-1/4 text-left py-3 px-4">{{ $product->name }}</td>
+                                    <td class="w-1/4 text-left py-3 px-4">{{ $product->description }}</td>
+                                    <td class="text-left py-3 px-4">${{ $product->price }}</td>
                                     <td class="text-left py-3 px-4">
-                                        editar
-                                        eliminar
+                                        @if($product->status_id == 1)
+                                            <span class="bg-green-500 text-white py-1 px-3 rounded-full text-xs">Activo</span>
+                                        @else
+                                            <span class="bg-red-500 text-white py-1 px-3 rounded-full text-xs">Inactivo</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-left py-3 px-4">
+                                        <a href="{{ route('products.edit', $product->id) }}" class="mr-3">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
+                                                <i class="fas fa-trash mr-3"></i>
+                                            </button>
+                                        </form>                                                                                
+                                        <form action="{{ route('products.toggleStatus', $product->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit">
+                                                <i class="fas fa-toggle-on mr-3"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
-                        </table>
+                        </table>                        
                     </div>
                 </div>
             </main>

@@ -52,10 +52,14 @@ Route::middleware([
     Route::post('/users/make-artist/{id}', [UserController::class, 'makeArtist'])->name('usersMakeArtist');
     Route::post('/users/make-user/{id}', [UserController::class, 'makeUser'])->name('usersMakeUser');
 
-    //rutas tienda
+   // Rutas tienda
     Route::get('/storeNav', [StoreController::class, 'storeNav'])->name('storeNav');
     Route::get('/store', [StoreController::class, 'store'])->name('store');
     Route::get('/registerProduct', [StoreController::class, 'registerProduct'])->name('registerProduct');
     Route::post('/productStore', [StoreController::class, 'productStore'])->name('productStore');
+    Route::get('/product/edit/{id}', [StoreController::class, 'editProduct'])->name('products.edit');
+    Route::put('/product/update/{id}', [StoreController::class, 'updateProduct'])->name('products.update');
+    Route::delete('/product/delete/{id}', [StoreController::class, 'destroyProduct'])->name('products.destroy');
+    Route::post('/product/toggle-status/{id}', [StoreController::class, 'toggleProductStatus'])->name('products.toggleStatus');
     
 });

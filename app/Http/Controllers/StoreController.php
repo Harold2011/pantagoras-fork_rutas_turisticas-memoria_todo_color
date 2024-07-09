@@ -35,12 +35,10 @@ class StoreController extends Controller
             'category_id' => 'required|exists:category,id'
         ]);
 
-        // Manejar la subida de la imagen
         if ($request->hasFile('url')) {
             $imagePath = $request->file('url')->store('images', 'public');
         }
 
-        // Crear una nueva galería
         products::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -51,7 +49,78 @@ class StoreController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        // Redirigir a una página de éxito o mostrar un mensaje
         return redirect()->route('store')->with('success', 'Producto registrado exitosamente.');
+    }
+
+    public function destroyProduct($id)
+    {
+        $product = products::find($id);
+
+        if (!$product) {
+            return redirect()->route('store')->with('error', 'Producto no encontrado');
+        }
+
+        $product->delete();
+
+        return redirect()->route('store')->with('success', 'Producto eliminado correctamente');
+    }
+
+    public function toggleProductStatus($id)
+    {
+        $product = products::find($id);
+        
+        if ($product) {
+            $newStateId = $product->status_id == 1 ? 2 : 1;
+            
+            $newState = State::find($newStateId);
+            if ($newState) {
+                $product->status_id = $newState->id;
+                $product->save();
+                return redirect()->route('store')->with('success', 'Estado del producto actualizado correctamente');
+            } else {
+                return redirect()->route('store')->with('error', 'Estado no encontrado');
+            }
+        }
+        
+        return redirect()->route('store')->with('error', 'Producto no encontrado');
+    }
+
+    public function editProduct($id)
+    {
+        $product = products::findOrFail($id);
+        $states = State::all();
+        $categories = Category::all();
+        
+        return view('admin.store.editProduct', compact('product', 'states', 'categories'));
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:200',
+            'price' => 'required|numeric',
+            'amount' => 'required|integer',
+            'url' => 'image|mimes:jpeg,png,jpg,gif',
+            'status_id' => 'required|exists:state,id',
+            'category_id' => 'required|exists:category,id',
+        ]);
+
+        $product = products::findOrFail($id);
+
+        if ($request->hasFile('url')) {
+            $imagePath = $request->file('url')->store('images', 'public');
+            $product->url = $imagePath;
+        }
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->amount = $request->amount;
+        $product->status_id = $request->status_id;
+        $product->category_id = $request->category_id;
+        $product->save();
+
+        return redirect()->route('store')->with('success', 'Producto actualizado correctamente');
     }
 }

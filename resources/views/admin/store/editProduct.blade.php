@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Galería</title>
+    <title>Editar Producto</title>
     <meta name="author" content="David Grzyb">
     <meta name="description" content="">
 
@@ -19,41 +19,60 @@
         @include('components.nav_head_admin')
         <div class="w-full overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
-                <h1 class="text-3xl text-black pb-6">Editar Contenido</h1>
+                <h1 class="text-3xl text-black pb-6">Editar Producto</h1>
                 <div class="w-full mt-12">
                     <div class="bg-white overflow-auto grid grid-cols-2 gap-4 p-10">
-                        <a href="{{ route('galleryAdmin')}}"><button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                        <a href="{{ route('storeNav')}}"><button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                             <i class="fas fa-arrow-alt-circle-left mr-3"></i> Regresar
                         </button></a>
                     </div>
                     <div class="bg-white overflow-auto w-full gap-4 p-10">
                         <div class="mx-auto my-10 bg-white w-full p-8 rounded-lg shadow-lg">
                             <h2 class="text-2xl font-bold mb-6">Formulario de Edición</h2>
-                            <form action="{{ route('galleryUpdate', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="mb-4">
                                     <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                    <input type="text" id="name" name="name" value="{{ $gallery->name }}" maxlength="100" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                    <input type="text" id="name" name="name" value="{{ $product->name }}" maxlength="100" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
-                                    <input type="text" id="description" name="description" value="{{ $gallery->description }}" maxlength="200" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                    <input type="text" id="description" name="description" value="{{ $product->description }}" maxlength="200" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
+                                    <input type="number" id="price" name="price" value="{{ $product->price }}" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="amount" class="block text-sm font-medium text-gray-700">Cantidad</label>
+                                    <input type="number" id="amount" name="amount" value="{{ $product->amount }}" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="url" class="block text-sm font-medium text-gray-700">Imagen</label>
                                     <input type="file" id="url" name="url" accept="image/*" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <img src="{{ asset('storage/' . $gallery->url) }}" alt="Imagen actual" class="mt-2 h-32">
+                                    @if($product->url)
+                                        <img src="{{ asset('storage/' . $product->url) }}" alt="{{ $product->name }}" class="mt-2 h-32">
+                                    @endif
                                 </div>
                                 <div class="mb-4">
                                     <label for="status_id" class="block text-sm font-medium text-gray-700">Estado</label>
                                     <select id="status_id" name="status_id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                                        @foreach ($state as $states)
-                                            <option value="{{ $states->id }}" {{ $gallery->status_id == $states->id ? 'selected' : '' }}>{{ $states->name }}</option>
+                                        @foreach ($states as $state)
+                                            <option value="{{ $state->id }}" {{ $product->status_id == $state->id ? 'selected' : '' }}>{{ $state->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="category_id" class="block text-sm font-medium text-gray-700">Categoría</label>
+                                    <select id="category_id" name="category_id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div>
-                                    <button type="submit" class="w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="submit" class="p-5 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Actualizar
                                     </button>
                                 </div>
