@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="{{ route('orders') }}">
                         <div class="max-w-sm rounded overflow-hidden shadow-lg">
                             <img class="w-full" src="{{ asset('storage/img/pedido.svg') }}" alt="Sunset in the mountains">
                             <div class="px-6 py-4">

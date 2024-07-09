@@ -61,5 +61,9 @@ Route::middleware([
     Route::put('/product/update/{id}', [StoreController::class, 'updateProduct'])->name('products.update');
     Route::delete('/product/delete/{id}', [StoreController::class, 'destroyProduct'])->name('products.destroy');
     Route::post('/product/toggle-status/{id}', [StoreController::class, 'toggleProductStatus'])->name('products.toggleStatus');
+    Route::get('/orders', [StoreController::class, 'showOrders'])->name('orders');
+    Route::get('/bill/{id}', [StoreController::class, 'showBill'])->name('bill.show');
+
+
     
 });

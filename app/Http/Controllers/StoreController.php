@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\state;
 use App\Models\category;
 use App\Models\products;
+use App\Models\buy_bill;
+use App\Models\bill;
+use App\Models\buys;
+use App\Models\User;
 
 class StoreController extends Controller
 {
@@ -122,5 +126,22 @@ class StoreController extends Controller
         $product->save();
 
         return redirect()->route('store')->with('success', 'Producto actualizado correctamente');
+    }
+
+    public function showOrders()
+    {
+        $orders = buy_bill::with(['bill', 'buys.product', 'user'])
+                    ->orderBy('id', 'desc') // Ordenar opcionalmente por ID de pedido descendente
+                    ->get()
+                    ->groupBy('bill_id'); // Agrupar por ID de factura
+
+        return view('admin.store.ordersProduct', compact('orders'));
+    }
+
+
+    public function showBill($id)
+    {
+        $bill = bill::with('buyBills.buys')->findOrFail($id);
+        return view('admin.store.bill', compact('bill'));
     }
 }
