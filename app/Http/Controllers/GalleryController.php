@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\gallery;
 use App\Models\state;
 use App\Models\Multimedia;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
-
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -121,6 +120,49 @@ class GalleryController extends Controller
         return redirect()->route('galleryAdmin')->with('error', 'Galería no encontrada');
     }
 
+    public function toggleImageStatus($id) {
+        $image = Multimedia::find($id);
+        if ($image) {
+            $image->status_id = $image->status_id == 1 ? 2 : 1;
+            $image->save();
+            return redirect()->route('galleryAdmin')->with('success', 'Estado de la imagen actualizado correctamente');
+        }
+        return redirect()->route('galleryAdmin')->with('error', 'Imagen no encontrada');
+    }
     
+    public function editImage($id) {
+        $image = Multimedia::find($id);
+        $gallery = Gallery::all();
+        $state = State::all();
+        $user = User::role('artista')->get();
+        return view('admin.content.editImage', compact('image', 'gallery', 'state', 'user'));
+    }
     
+    public function updateImage(Request $request, $id) {
+        $image = Multimedia::find($id);
+        $image->name = $request->input('name');
+        $image->description = $request->input('description');
+    
+        if ($request->hasFile('url')) {
+            Storage::disk('public')->delete($image->url);
+            $image->url = $request->file('url')->store('images', 'public');
+        }
+    
+        $image->status_id = $request->input('status_id');
+        $image->gallery_id = $request->input('gallery_id');
+        $image->user_id = $request->input('user_id');
+        $image->save();
+    
+        return redirect()->route('galleryAdmin')->with('success', 'Imagen actualizada correctamente');
+    }
+    
+    public function destroyImage($id) {
+        $image = Multimedia::find($id);
+        if ($image) {
+            Storage::disk('public')->delete($image->url);
+            $image->delete();
+            return redirect()->route('galleryAdmin')->with('success', 'Imagen eliminada correctamente');
+        }
+        return redirect()->route('galleryAdmin')->with('error', 'Imagen no encontrada');
+    }    
 }

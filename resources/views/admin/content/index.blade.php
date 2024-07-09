@@ -74,7 +74,6 @@
                             @endforeach
                         </tbody>
                         </table>
-                        
                         <table class="min-w-full bg-white">
                             <thead class="bg-gray-800 text-white">
                                 <tr>
@@ -89,23 +88,23 @@
                                     <tr>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $multimedias->name }}</td>
                                         <td class="w-1/3 text-left py-3 px-4">{{ $multimedias->description }}</td>
-                                        <td class="text-left py-3 px-4">{{ $multimedias->state }}</td>
+                                        <td class="text-left py-3 px-4">{{ $multimedias->status_id == 1 ? 'Activo' : 'Inactivo' }}</td>
                                         <td class="text-left py-3 px-4">
-                                            <i class="fas fa-pen mr-3"></i>
-                                            <i class="fas fa-trash mr-3"></i>
-                                            <i class="fas fa-toggle-on mr-3"></i>
+                                            <a href="{{ route('editImage', $multimedias->id) }}"><i class="fas fa-pen mr-3"></i></a>
+                                            <form action="{{ route('destroyImage', $multimedias->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"><i class="fas fa-trash mr-3"></i></button>
+                                            </form>
+                                            <a href="{{ route('toggleImageStatus', $multimedias->id) }}"><i class="fas fa-toggle-on mr-3"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                        </table>                        
                     </div>
                 </div>
-                
-    
-                
             </main>
-    
             <footer class="w-full bg-white text-right p-4">
                 <a target="_blank" href="" class="underline">Memoria todo color 2024.</a>.
             </footer>

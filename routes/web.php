@@ -42,8 +42,10 @@ Route::middleware([
     Route::post('/gallery/update/{id}', [GalleryController::class, 'update'])->name('galleryUpdate');
     Route::delete('/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('galleryDelete');
     Route::post('/gallery/toggle-status/{id}', [GalleryController::class, 'toggleStatus'])->name('galleryToggleStatus');
-
-
+    Route::get('/toggle-image-status/{id}', [GalleryController::class, 'toggleImageStatus'])->name('toggleImageStatus');
+    Route::get('/edit-image/{id}', [GalleryController::class, 'editImage'])->name('editImage');
+    Route::put('/update-image/{id}', [GalleryController::class, 'updateImage'])->name('updateImage'); // Añade esta línea
+    Route::delete('/destroy-image/{id}', [GalleryController::class, 'destroyImage'])->name('destroyImage');
 
     //rutas de usuarios
     Route::get('/users', [UserController::class, 'index'])->name('usersIndex');
