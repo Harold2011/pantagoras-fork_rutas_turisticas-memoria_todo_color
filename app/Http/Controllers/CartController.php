@@ -41,11 +41,11 @@ class CartController extends Controller
 
         // Define PayU parameters
         $merchantId = '508029';
-        $accountId = '512326'; // Cambiado a tu accountId de PayU
+        $accountId = '512321'; // Cambiado a tu accountId de PayU
         $description = 'Productos de la tienda';
         $referenceCode = 'TestPayU';
-        $tax = 0;
-        $taxReturnBase = 0;
+        $tax = 3193;
+        $taxReturnBase = 16806;
         $currency = 'COP'; // Moneda colombiana
         $confirmationUrl = url('/confirmation'); // Ajusta según tu ruta
         $responseUrl = url('/response'); // Ajusta según tu ruta
