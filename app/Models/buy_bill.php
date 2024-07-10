@@ -11,7 +11,7 @@ class buy_bill extends Model
     use HasFactory;
 
     protected $table = 'buy_bill';
-    protected $fillable = ['bill_id', 'buy_id', 'user_id'];
+    protected $fillable = ['bill_id', 'buy_id', 'user_id', 'adress'];
 
     public function bill()
     {

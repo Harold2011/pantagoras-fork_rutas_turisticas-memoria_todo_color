@@ -1,17 +1,30 @@
+<!-- resources/views/store.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Store</title>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .background-fixed {
             background-image: url('{{ asset('storage/img/fondo.png') }}');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
+        }
+        .product-card img {
+            object-fit: cover;
+            width: 100%;
+            height: 200px; /* Ajusta la altura según sea necesario */
+        }
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
     </style>
 </head>
@@ -32,38 +45,34 @@
             </header>
             <main>
                 <div class="container px-5 py-24 mx-auto">
-                <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Quiero realizar una compra personalizada.</button>
+                    <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Quiero realizar una compra personalizada.</button>
                     <div class="flex flex-wrap justify-center">
                         @foreach($products as $product)
-                            <div class="w-full m-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                <a href="#">
+                            <div class="w-full m-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 product-card">
+                                <a href="{{ route('viewProduct', $product->id) }}">
                                     <img class="p-8 rounded-t-lg" src="{{ asset('storage/'.$product->url) }}" alt="product image" />
                                 </a>
-                                <div class="px-5 pb-5">
-                                    <a href="#">
+                                <div class="px-5 pb-5 flex flex-col flex-grow">
+                                    <a href="{{ route('viewProduct', $product->id) }}">
                                         <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $product->name }}</h5>
                                     </a>
-                                    <div class="flex items-center mt-2.5 mb-5">
-                                        <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                                            <p>{{ $product->description }}</p>
-                                        </div>
+                                    <div class="flex items-center mt-2.5 mb-5 flex-grow">
+                                        <p>{{ $product->description }}</p>
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <span class="text-3xl font-bold text-gray-900 dark:text-white">$ {{ $product->price }}</span>
-                                        <a href="#" class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fa-solid fa-cart-plus"></i>+</a>
+                                        <form action="{{ route('addToCart', $product->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregar al carrito +</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-            </main> 
+            </main>
         </div>
     </div>
 </body>
 </html>
-
-
-
-
-
