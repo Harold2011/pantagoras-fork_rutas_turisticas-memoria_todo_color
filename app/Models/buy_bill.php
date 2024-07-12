@@ -11,7 +11,7 @@ class buy_bill extends Model
     use HasFactory;
 
     protected $table = 'buy_bill';
-    protected $fillable = ['bill_id', 'buy_id', 'user_id', 'address'];
+    protected $fillable = ['bill_id', 'buy_id'];
 
     public function bill()
     {
@@ -27,4 +27,6 @@ class buy_bill extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
 }

@@ -38,19 +38,19 @@
                                         $firstOrder = $billOrders->first();
                                     @endphp
                                     <tr>
-                                        <td class="w-1/6 text-left py-3 px-4">{{ $firstOrder->bill_id }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ optional($firstOrder->bill)->id }}</td>
                                         <td class="w-1/6 text-left py-3 px-4">
                                             <ul>
                                                 @foreach($billOrders as $order)
-                                                    <li>{{ $order->buys->product->name }}</li>
+                                                    <li>{{ optional($order->buys->product)->name }}</li>
                                                 @endforeach
                                             </ul>
                                         </td>
-                                        <td class="w-1/6 text-left py-3 px-4">{{ $firstOrder->user->name }}</td>
-                                        <td class="w-1/6 text-left py-3 px-4">${{ $firstOrder->bill->total }}</td>
-                                        <td class="w-1/6 text-left py-3 px-4">{{ $firstOrder->bill->date }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ optional($firstOrder->bill->user)->name }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">${{ optional($firstOrder->bill)->total }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ optional($firstOrder->bill)->date }}</td>
                                         <td class="w-1/6 text-left py-3 px-4">
-                                            <a href="{{ route('bill.show', $firstOrder->bill_id) }}">
+                                            <a href="{{ route('bill.show', optional($firstOrder->bill)->id) }}">
                                                 <button class="bg-[#120A33] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver Factura</button>
                                             </a>
                                         </td>

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('total');
             $table->string('entity', 200);
             $table->date('date');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('address', 500);
             $table->timestamps();
         });
     }

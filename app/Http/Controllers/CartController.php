@@ -143,6 +143,8 @@ class CartController extends Controller
         }
 
         if (strtoupper($firma) == strtoupper($firmacreada)) {
+            
+            $user_id = auth()->id();
 
             $bill = bill::create([
                 'id_transaction' => $transactionId,
@@ -150,10 +152,11 @@ class CartController extends Controller
                 'ref_transaction' => $reference_pol,
                 'total' => $TX_VALUE,
                 'entity' => $lapPaymentMethod,
-                'date' => now()
+                'date' => now(),
+                'user_id' => $user_id,
+                'address' => Session::get('shippingAddress') . ', ' . Session::get('shippingCity'),
             ]);
 
-            $user_id = auth()->id();
 
             if (!empty($cartItems)) {
                 foreach ($cartItems as $item) {
@@ -167,16 +170,17 @@ class CartController extends Controller
                         buy_bill::create([
                             'bill_id' => $bill->id,
                             'buy_id' => $buy->id,
-                            'user_id' => $user_id,
-                            'address' => Session::get('shippingAddress') . ', ' . Session::get('shippingCity'),
                         ]);
                     }
                 }
             }
 
+            $request->session()->forget(['cart', 'shippingAddress', 'shippingCity']);
+
             return view('Response', compact('data', 'estadoTx', 'bill'));
         }
     }
+
 
     public function handlePayment(Request $request)
     {

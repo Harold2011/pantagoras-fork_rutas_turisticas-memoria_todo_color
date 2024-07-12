@@ -30,13 +30,16 @@
                     @include('components/nav_landing')
                 </div>
             </header>
-            <main class="flex justify-center items-center h-full">
-                <div class="container mx-auto my-10 max-w-4xl bg-white rounded-lg shadow-md">
+            <main class="flex justify-center items-center mt-8"> <!-- Ajusta el margen superior -->
+                <div class="container mx-auto max-w-4xl bg-white rounded-lg shadow-md">
                     <div class="w-full px-10 py-10">
                         <div class="flex justify-between border-b pb-8">
                             <h1 class="font-semibold text-2xl">Carrito de compras</h1>
                             <h2 class="font-semibold text-2xl">{{ count($cartItems) }} Items</h2>
                         </div>
+                        @if(count($cartItems) <= 0)
+                            <h1 class="font-semibold text-2xl">El carrito esta vacio</h1>
+                        @else
                         <div class="flex mt-10 mb-5">
                             <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Detalles del producto</h3>
                             <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">Cantidad</h3>
@@ -96,6 +99,7 @@
                                 <input type="text" name="shippingCity" placeholder="Ciudad de envío" class="border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                                 <button type="submit" class="p-4 bg-[#120A33] text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2">Comprar</button>
                             </form>
+                        @endif
                         </div>
                     </div>
                 </div>

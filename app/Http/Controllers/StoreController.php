@@ -130,13 +130,19 @@ class StoreController extends Controller
 
     public function showOrders()
     {
-        $orders = buy_bill::with(['bill', 'buys.product', 'user'])
-                    ->orderBy('id', 'desc') // Ordenar opcionalmente por ID de pedido descendente
-                    ->get()
-                    ->groupBy('bill_id'); // Agrupar por ID de factura
+        $orders = buy_bill::with(['bill.user', 'buys.product'])
+                        ->orderByDesc('id')
+                        ->get()
+                        ->groupBy('bill_id');
+
+        if ($orders->isEmpty()) {
+            return view('admin.store.ordersProduct')->with('error', 'No hay pedidos disponibles.');
+        }
 
         return view('admin.store.ordersProduct', compact('orders'));
     }
+
+
 
 
     public function showBill($id)
