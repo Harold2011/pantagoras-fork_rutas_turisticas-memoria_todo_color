@@ -25,11 +25,15 @@ Route::get('/artists', [LandingController::class, 'viewartists'])->name('artists
 Route::get('/storeUser', [LandingController::class, 'store'])->name('storeUser');
 Route::get('/product/{id}', [LandingController::class, 'viewProduct'])->name('viewProduct');
 
-//ruta carrito
+// Rutas del carrito
 Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
 Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::put('/cart/update/{product}', [CartController::class, 'updateCart'])->name('updateCart');
 Route::delete('/cart/remove/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+
+Route::get('/response', [CartController::class, 'handlePayuResponse'])->name('response');
+Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handlePayment');
+
 
 Route::middleware([
     'auth:sanctum',

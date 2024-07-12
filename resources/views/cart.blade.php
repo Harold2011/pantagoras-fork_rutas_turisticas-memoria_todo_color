@@ -77,7 +77,7 @@
                                 <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H432c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16H134.059l72.971-72.971c6.249-6.249 6.249-16.379 0-22.627l-11.314-11.314c-6.249-6.249-16.379-6.249-22.627 0L70.059 244.059c-6.249 6.249-6.249 16.379 0 22.627L173.089 369c6.248 6.249 16.379 6.249 22.627 0l11.314-11.314c6.249-6.249 6.249-16.379 0-22.627L134.059 296z"></path></svg>
                                 Continuar comprando
                             </a>
-                            <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" class="flex items-center">
+                            <form method="post" action="{{ route('handlePayment') }}" class="flex items-center">
                                 @csrf
                                 <input type="hidden" name="merchantId" value="{{ $merchantId }}">
                                 <input type="hidden" name="accountId" value="{{ $accountId }}">

@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\products;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\bill;
+use App\Models\buy_bill;
+use App\Models\buys;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -18,6 +23,7 @@ class CartController extends Controller
             $cart[$productId]['quantity'] += 1;
         } else {
             $cart[$productId] = [
+                'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,
@@ -32,6 +38,7 @@ class CartController extends Controller
 
     public function viewCart()
     {
+        $code = Str::random(20);
         $cartItems = Session::get('cart', []);
         $totalAmount = 0;
 
@@ -39,25 +46,24 @@ class CartController extends Controller
             $totalAmount += $item['price'] * $item['quantity'];
         }
 
-        // Define PayU parameters
         $merchantId = '508029';
-        $accountId = '512321'; // Cambiado a tu accountId de PayU
+        $accountId = '512321';
         $description = 'Productos de la tienda';
-        $referenceCode = 'TestPayU';
-        $tax = 3193;
-        $taxReturnBase = 16806;
-        $currency = 'COP'; // Moneda colombiana
-        $confirmationUrl = url('/confirmation'); // Ajusta según tu ruta
-        $responseUrl = url('/response'); // Ajusta según tu ruta
-        $test = 1; // Cambia a 0 para producción
 
-        // Generar la firma
-        $apiKey = '4Vj8eK4rloUd272L48hsrarnUA'; // Llave secreta proporcionada por PayU
-        $signature = md5($apiKey . '~' . $merchantId . '~' . $referenceCode . '~' . $totalAmount . '~' . $currency);
+        $referenceCode = 'PayU_' . time() . $code;
+
+        $tax = 0;
+        $taxReturnBase = 0;
+        $currency = 'COP';
+        $confirmationUrl = url('/confirmation');
+        $responseUrl = url('/response');
+        $test = 1;
+
+        $apiKey = '4Vj8eK4rloUd272L48hsrarnUA';
+        $signature = md5($apiKey . '~' . $merchantId . '~' . $referenceCode . '~' . number_format($totalAmount, 1, '.', '') . '~' . $currency);
 
         return view('cart', compact('cartItems', 'totalAmount', 'merchantId', 'accountId', 'description', 'referenceCode', 'tax', 'taxReturnBase', 'currency', 'confirmationUrl', 'responseUrl', 'signature', 'test'));
     }
-
 
     public function updateCart(Request $request, $productId)
     {
@@ -85,29 +91,134 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product removed from cart!');
     }
 
-    // Método para procesar la respuesta de PayU
     public function handlePayuResponse(Request $request)
     {
-        // Verificar la firma recibida desde PayU
-        $receivedSignature = $request->input('signature');
-        $expectedSignature = md5(env('PAYU_API_KEY') . '~' . $request->input('merchantId') . '~' . $request->input('referenceCode') . '~' . $request->input('TX_VALUE') . '~' . $request->input('currency') . '~' . $request->input('transactionState'));
+        $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
+        $merchant_id = $_REQUEST['merchantId'];
+        $referenceCode = $_REQUEST['referenceCode'];
+        $TX_VALUE = $_REQUEST['TX_VALUE'];
+        $New_value = number_format($TX_VALUE, 1, '.', '');
+        $currency = $_REQUEST['currency'];
+        $transactionState = $_REQUEST['transactionState'];
+        $firma_cadena = "$ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
+        $firmacreada = md5($firma_cadena);
+        $firma = $_REQUEST['signature'];
+        $reference_pol = $_REQUEST['reference_pol'];
+        $cus = $_REQUEST['cus'];
+        $extra1 = $_REQUEST['description'];
+        $pseBank = $_REQUEST['pseBank'];
+        $lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
+        $transactionId = $_REQUEST['transactionId'];
+        $currentDate = date('Y-m-d');
+        $cartItems = session('cart');
 
-        // Comparar la firma recibida con la esperada
-        if ($receivedSignature == $expectedSignature) {
-            // Firma válida, procesar la respuesta de PayU según el estado de la transacción
-            $transactionState = $request->input('transactionState');
+        $data = [
+            'ApiKey' => $ApiKey,
+            'merchant_id' => $merchant_id,
+            'referenceCode' => $referenceCode,
+            'TX_VALUE' => $TX_VALUE,
+            'New_value' => $New_value,
+            'currency' => $currency,
+            'transactionState' => $transactionState,
+            'firma_cadena' => $firma_cadena,
+            'firmacreada' => $firmacreada,
+            'firma' => $firma,
+            'reference_pol' => $reference_pol,
+            'cus' => $cus,
+            'extra1' => $extra1,
+            'pseBank' => $pseBank,
+        ];
 
-            if ($transactionState == 4) { // Transacción aprobada
-                // Procesar lógica de negocio (actualizar base de datos, enviar correos, etc.)
-                return redirect()->route('thankyou')->with('success', 'Payment successful! Thank you for your purchase.');
-            } else {
-                // Transacción no aprobada, manejar según necesidades del negocio
-                return redirect()->route('cart')->with('error', 'Payment was not successful. Please try again or contact support.');
-            }
+        $estadoTx = "";
+        if ($transactionState == 4) {
+            $estadoTx = "Transaction approved";
+        } elseif ($transactionState == 6) {
+            $estadoTx = "Transaction rejected";
+        } elseif ($transactionState == 104) {
+            $estadoTx = "Error";
+        } elseif ($transactionState == 7) {
+            $estadoTx = "Pending payment";
         } else {
-            // Firma inválida, posible intento de fraude
-            return redirect()->route('cart')->with('error', 'Invalid signature received. Possible fraud attempt.');
+            $estadoTx = "Unknown state";
+        }
+
+        if (strtoupper($firma) == strtoupper($firmacreada)) {
+
+            $bill = bill::create([
+                'id_transaction' => $transactionId,
+                'ref_sale' => $referenceCode,
+                'ref_transaction' => $reference_pol,
+                'total' => $TX_VALUE,
+                'entity' => $lapPaymentMethod,
+                'date' => now()
+            ]);
+
+            $user_id = auth()->id();
+
+            if (!empty($cartItems)) {
+                foreach ($cartItems as $item) {
+                    if (isset($item['id'])) {
+                        $buy = buys::create([
+                            'product_id' => $item['id'],
+                            'total' => $item['price'] * $item['quantity'],
+                            'date' => now(),
+                        ]);
+
+                        buy_bill::create([
+                            'bill_id' => $bill->id,
+                            'buy_id' => $buy->id,
+                            'user_id' => $user_id,
+                            'address' => Session::get('shippingAddress') . ', ' . Session::get('shippingCity'),
+                        ]);
+                    }
+                }
+            }
+
+            return view('Response', compact('data', 'estadoTx', 'bill'));
         }
     }
 
+    public function handlePayment(Request $request)
+    {
+        $request->validate([
+            'shippingAddress' => 'required|string|max:255',
+            'shippingCity' => 'required|string|max:255',
+            'merchantId' => 'required|string',
+            'accountId' => 'required|string',
+            'description' => 'required|string',
+            'referenceCode' => 'required|string',
+            'amount' => 'required|numeric',
+            'tax' => 'required|numeric',
+            'taxReturnBase' => 'required|numeric',
+            'currency' => 'required|string',
+            'signature' => 'required|string',
+            'test' => 'required|boolean',
+            'buyerEmail' => 'required|email',
+            'responseUrl' => 'required|url',
+            'confirmationUrl' => 'required|url',
+        ]);
+
+        Session::put('shippingAddress', $request->input('shippingAddress'));
+        Session::put('shippingCity', $request->input('shippingCity'));
+
+        $data = $request->except('_token');
+        $payuUrl = 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/';
+
+        $form = '<form id="payuForm" method="POST" action="' . $payuUrl . '">';
+        foreach ($data as $key => $value) {
+            $form .= '<input type="hidden" name="' . $key . '" value="' . htmlspecialchars($value) . '">';
+        }
+        $form .= '</form>';
+        $form .= '<script>document.getElementById("payuForm").submit();</script>';
+
+        return response($form);
+    }
+
+    public function showShippingDetails()
+    {
+        $shippingAddress = Session::get('shippingAddress');
+        $shippingCity = Session::get('shippingCity');
+
+        return view('shippingDetails', compact('shippingAddress', 'shippingCity'));
+    }
 }
