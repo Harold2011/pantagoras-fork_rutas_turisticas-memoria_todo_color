@@ -1,4 +1,3 @@
-<!-- resources/views/store.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,7 @@
         .product-card img {
             object-fit: cover;
             width: 100%;
-            height: 200px; /* Ajusta la altura según sea necesario */
+            height: 200px;
         }
         .product-card {
             display: flex;
@@ -45,7 +44,9 @@
             </header>
             <main>
                 <div class="container px-5 py-24 mx-auto">
-                    <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Quiero realizar una compra personalizada.</button>
+                    <a href="{{ route('buysPersonalized') }}">
+                        <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Quiero realizar una compra personalizada.</button>
+                    </a>
                     <div class="flex flex-wrap justify-center">
                         @foreach($products as $product)
                             <div class="w-full m-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 product-card">

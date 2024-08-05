@@ -134,17 +134,9 @@ class StoreController extends Controller
                         ->orderByDesc('id')
                         ->get()
                         ->groupBy('bill_id');
-
-        if ($orders->isEmpty()) {
-            return view('admin.store.ordersProduct')->with('error', 'No hay pedidos disponibles.');
-        }
-
         return view('admin.store.ordersProduct', compact('orders'));
     }
-
-
-
-
+    
     public function showBill($id)
     {
         $bill = bill::with('buyBills.buys')->findOrFail($id);

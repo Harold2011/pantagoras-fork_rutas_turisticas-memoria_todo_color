@@ -5,6 +5,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\productsPersonalizedController;
 use App\Http\Controllers\CartController;
 
 //rutas inicio
@@ -24,13 +25,14 @@ Route::get('/artists', [LandingController::class, 'viewartists'])->name('artists
 //ruta tienda
 Route::get('/storeUser', [LandingController::class, 'store'])->name('storeUser');
 Route::get('/product/{id}', [LandingController::class, 'viewProduct'])->name('viewProduct');
+Route::get('/buysPersonalized', [productsPersonalizedController::class, 'personalized'])->name('buysPersonalized');
+Route::post('/buysPersonalized', [productsPersonalizedController::class, 'store'])->name('buysPersonalized.store');
 
 // Rutas del carrito
 Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
 Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::put('/cart/update/{product}', [CartController::class, 'updateCart'])->name('updateCart');
 Route::delete('/cart/remove/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
-
 Route::get('/response', [CartController::class, 'handlePayuResponse'])->name('response');
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handlePayment');
 

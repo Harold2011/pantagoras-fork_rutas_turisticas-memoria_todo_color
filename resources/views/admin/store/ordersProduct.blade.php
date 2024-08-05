@@ -1,3 +1,4 @@
+<!-- resources/views/admin/store/ordersProduct.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +21,11 @@
             <main class="w-full flex-grow p-6">
                 <h1 class="text-3xl text-black pb-6">Pedidos</h1>
                 <div class="w-full mt-12">
+                    @if(session('error'))
+                        <div class="bg-red-500 text-white p-4 mb-4">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="bg-white overflow-auto grid grid-cols-1 gap-4 p-10">
                         <table class="min-w-full bg-white mt-4">
                             <thead class="bg-gray-800 text-white">
