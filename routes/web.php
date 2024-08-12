@@ -7,6 +7,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\productsPersonalizedController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\menssajeController;
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\routesController;
+
 
 //rutas inicio
 Route::get('/', function () {
@@ -36,15 +40,20 @@ Route::delete('/cart/remove/{product}', [CartController::class, 'removeFromCart'
 Route::get('/response', [CartController::class, 'handlePayuResponse'])->name('response');
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handlePayment');
 
+//Ruta de mensaje
+Route::post('/contacto', [menssajeController::class, 'store'])->name('contacto.store');
+Route::get('/contactoIndex', [menssajeController::class, 'index'])->name('contacto.index');
+
+
+//Ruta de rutas
+Route::get('indexLanding', [routesController::class, 'indexLanding'])->name('indexLanding');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
     
     //rutas de contenido gallery and images
     Route::get('/galleryAdmin', [GalleryController::class, 'gallery'])->name('galleryAdmin');
@@ -77,7 +86,15 @@ Route::middleware([
     Route::post('/product/toggle-status/{id}', [StoreController::class, 'toggleProductStatus'])->name('products.toggleStatus');
     Route::get('/orders', [StoreController::class, 'showOrders'])->name('orders');
     Route::get('/bill/{id}', [StoreController::class, 'showBill'])->name('bill.show');
+    Route::get('/orders-product', [productsPersonalizedController::class, 'index'])->name('orders.product.index');
+    Route::get('/toggle-status/{id}', [ProductsPersonalizedController::class, 'toggleStatus'])->name('toggle.status');
+
+    // Rutas mensajes
+    Route::get('/indexMessage', [menssajeController::class, 'indexMenssage'])->name('indexMessage');
+    Route::delete('/message/delete/{id}', [menssajeController::class, 'destroy'])->name('message.destroy');
 
 
+    // Rutas de rutas
+    Route::get('index', [routesController::class, 'indexLanding'])->name('indexLanding');
     
 });

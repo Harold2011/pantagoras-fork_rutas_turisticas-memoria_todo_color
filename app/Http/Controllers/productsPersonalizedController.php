@@ -28,7 +28,7 @@ class ProductsPersonalizedController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'number' => $request->number,
-            'state_id' => 1,  // Asegúrate de usar status_id en lugar de state_id
+            'state_id' => 1,
             'user_id' => Auth::id(),
             'multimedia_id' => $request->multimedia_id,
             'description' => $request->description,
@@ -36,4 +36,22 @@ class ProductsPersonalizedController extends Controller
 
         return redirect()->back()->with('success', 'Solicitud enviada exitosamente.');
     }
+
+    public function index()
+    {
+        $productsPersonalized = productsPersonalized::all();
+
+        return view('admin.storePersonalized.index', compact('productsPersonalized'));
+    }
+
+    public function toggleStatus($id)
+    {
+        $product = productsPersonalized::findOrFail($id);
+        $product->state_id = $product->state_id == 1 ? 2 : 1;
+        $product->save();
+
+        return redirect()->back()->with('success', 'El estado ha sido actualizado.');
+    }
+
+
 }

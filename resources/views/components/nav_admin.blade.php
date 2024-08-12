@@ -18,7 +18,11 @@
                 <i class="fas fa-shopping-cart mr-3"></i>
                 Tienda
             </a>
-            <a href="" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ route('storeNav') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-shopping-cart mr-3"></i>
+                Rutas
+            </a>
+            <a href="{{ route('indexMessage') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-envelope mr-3"></i>
                 Mensajes
             </a>

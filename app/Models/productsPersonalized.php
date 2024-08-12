@@ -11,4 +11,9 @@ class productsPersonalized extends Model
 
     protected $table = 'products_personalized';
     protected $fillable = ['name', 'email', 'number', 'state_id', 'user_id', 'multimedia_id', 'description'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
