@@ -20,6 +20,11 @@
         <div class="w-full overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
                 <h1 class="text-3xl text-black pb-6">Rutas</h1>
+                <div class="bg-white overflow-auto grid grid-cols-2 gap-4 p-10">
+                    <a href="{{ route('registerRoute') }}"><button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                        <i class="fas fa-save mr-3"></i> Registrar
+                    </button></a>
+                </div>
                 <div class="w-full mt-12">
                     @if(session('error'))
                         <div class="bg-red-500 text-white p-4 mb-4">
@@ -38,24 +43,14 @@
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
-                                @foreach($orders as $billId => $billOrders)
-                                    @php
-                                        $firstOrder = $billOrders->first();
-                                    @endphp
+                                @foreach($route as $routes)
                                     <tr>
-                                        <td class="w-1/6 text-left py-3 px-4">{{ optional($firstOrder->bill)->id }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ $routes->id }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ $routes->name }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ $routes->description }}</td>
+                                        <td class="w-1/6 text-left py-3 px-4">{{ $routes->contact }}</td>
                                         <td class="w-1/6 text-left py-3 px-4">
-                                            <ul>
-                                                @foreach($billOrders as $order)
-                                                    <li>{{ optional($order->buys->product)->name }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </td>
-                                        <td class="w-1/6 text-left py-3 px-4">{{ optional($firstOrder->bill->user)->name }}</td>
-                                        <td class="w-1/6 text-left py-3 px-4">${{ optional($firstOrder->bill)->total }}</td>
-                                        <td class="w-1/6 text-left py-3 px-4">{{ optional($firstOrder->bill)->date }}</td>
-                                        <td class="w-1/6 text-left py-3 px-4">
-                                            <a href="{{ route('bill.show', optional($firstOrder->bill)->id) }}">
+                                            <a href="">
                                                 <button class="bg-[#120A33] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver Factura</button>
                                             </a>
                                         </td>

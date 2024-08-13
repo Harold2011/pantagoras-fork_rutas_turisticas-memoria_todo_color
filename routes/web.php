@@ -95,6 +95,7 @@ Route::middleware([
 
 
     // Rutas de rutas
-    Route::get('index', [routesController::class, 'indexLanding'])->name('indexLanding');
-    
+    Route::get('indexRoute', [routesController::class, 'index'])->name('indexRoute');
+    Route::get('registerRoute', [routesController::class, 'registerRoute'])->name('registerRoute');
+    Route::post('storeRoute', [routesController::class, 'store'])->name('storeRoute');
 });
