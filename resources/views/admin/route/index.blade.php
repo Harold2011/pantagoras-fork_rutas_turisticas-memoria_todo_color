@@ -39,6 +39,7 @@
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Descripcion</th>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Contacto</th>
+                                    <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Estado</th>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Acciones</th>
                                 </tr>
                             </thead>
@@ -49,10 +50,32 @@
                                         <td class="w-1/6 text-left py-3 px-4">{{ $routes->name }}</td>
                                         <td class="w-1/6 text-left py-3 px-4">{{ $routes->description }}</td>
                                         <td class="w-1/6 text-left py-3 px-4">{{ $routes->contact }}</td>
+                                        <td class="text-left py-3 px-4">
+                                            @if($routes->status_id == 1)
+                                                <span class="bg-green-500 text-white py-1 px-3 rounded-full text-xs">Activo</span>
+                                            @else
+                                                <span class="bg-red-500 text-white py-1 px-3 rounded-full text-xs">Inactivo</span>
+                                            @endif
+                                        </td>
                                         <td class="w-1/6 text-left py-3 px-4">
-                                            <a href="">
-                                                <button class="bg-[#120A33] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver Factura</button>
-                                            </a>
+                                        <a href="{{ route('route.edit', $routes->id) }}">
+                                            <button>
+                                                <i class="fas fa-pen mr-3"></i>
+                                            </button>
+                                        </a>
+                                        <form action="{{ route('route.destroy', $routes->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
+                                                <i class="fas fa-trash mr-3"></i>
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('routeToggleStatus', $routes->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit">
+                                                <i class="fas fa-toggle-on mr-3"></i>
+                                            </button>
+                                        </form>
                                         </td>
                                     </tr>
                                 @endforeach

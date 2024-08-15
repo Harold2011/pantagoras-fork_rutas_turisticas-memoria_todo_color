@@ -5,9 +5,8 @@
             <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" alt="Profile Photo">
         </button>
         <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
-        <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
-            <a href="#" class="block text-sm px-4 py-2 account-link hover:text-white">Account</a>
-            <a href="#" class="block text-sm px-4 py-2 account-link hover:text-white">Support</a>
+        <div x-show="isOpen" class="absolute max-w-auto bg-white rounded-lg shadow-lg py-2 mt-16">
+            <a href="{{ route('personal.edit', Auth::user()->id) }}" class="block text-sm px-4 py-2 account-link hover:text-white">Actualizar datos</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a class="block text-sm px-4 py-2 account-link hover:text-white"><button>Cerrar sesión</button></a>

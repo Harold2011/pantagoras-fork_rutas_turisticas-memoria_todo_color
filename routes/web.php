@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\menssajeController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\routesController;
+use App\Http\Controllers\personaldataController;
 
 
 //rutas inicio
@@ -98,4 +99,12 @@ Route::middleware([
     Route::get('indexRoute', [routesController::class, 'index'])->name('indexRoute');
     Route::get('registerRoute', [routesController::class, 'registerRoute'])->name('registerRoute');
     Route::post('storeRoute', [routesController::class, 'store'])->name('storeRoute');
+    Route::delete('/route/delete/{id}', [routesController::class, 'destroy'])->name('route.destroy');
+    Route::post('/route/toggle-status/{id}', [routesController::class, 'toggleStatus'])->name('routeToggleStatus');
+    Route::get('/route/edit/{id}', [routesController::class, 'edit'])->name('route.edit');
+    Route::put('/route/update/{id}', [routesController::class, 'updateRoute'])->name('route.update');
+
+    // Rutas actualizar datos
+    Route::get('/personal/edit/{id}', [personaldataController::class, 'edit'])->name('personal.edit');
+    Route::put('/personal/update/{id}', [personaldataController::class, 'update'])->name('personal.update');
 });
