@@ -130,12 +130,27 @@ class StoreController extends Controller
 
     public function showOrders()
     {
-        $orders = buy_bill::with(['bill.user', 'buys.product'])
-                        ->orderByDesc('id')
-                        ->get()
-                        ->groupBy('bill_id');
+        // Verifica si el usuario tiene el rol de 'admin'
+        if (auth()->user()->hasRole('admin')) {
+            // Si es admin, muestra todas las órdenes
+            $orders = buy_bill::with(['bill.user', 'buys.product'])
+                ->orderByDesc('id')
+                ->get()
+                ->groupBy('bill_id');
+        } else {
+            // Si es un usuario común, muestra solo sus órdenes
+            $orders = buy_bill::with(['bill.user', 'buys.product'])
+                ->whereHas('bill', function ($query) {
+                    $query->where('user_id', auth()->id());
+                })
+                ->orderByDesc('id')
+                ->get()
+                ->groupBy('bill_id');
+        }
+
         return view('admin.store.ordersProduct', compact('orders'));
     }
+
     
     public function showBill($id)
     {

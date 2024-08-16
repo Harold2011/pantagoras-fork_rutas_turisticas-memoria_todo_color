@@ -25,10 +25,7 @@
                         <img src="{{ asset('storage/img/logo.png') }}" class="h-20">
                     </a>
                 </div>
-                <input class="hidden" type="checkbox" id="menu-toggle" />
-                <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
                     @include('components/nav_landing')
-                </div>
             </header>
             <main>
                 <section class="text-gray-600 body-font">
@@ -58,5 +55,13 @@
             </main> 
         </div>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

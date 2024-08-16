@@ -39,7 +39,11 @@ class ProductsPersonalizedController extends Controller
 
     public function index()
     {
-        $productsPersonalized = productsPersonalized::all();
+        if (auth()->user()->hasRole('admin')) {
+            $productsPersonalized = productsPersonalized::all();
+        } else {
+            $productsPersonalized = productsPersonalized::where('user_id', Auth::id())->get();
+        }
 
         return view('admin.storePersonalized.index', compact('productsPersonalized'));
     }

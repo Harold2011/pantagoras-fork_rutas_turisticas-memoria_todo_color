@@ -18,48 +18,110 @@
             @include('components.nav_head_admin')
             <div class="w-full overflow-x-hidden border-t flex flex-col">
                 <main class="w-full flex-grow p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <a href="{{ route('store') }}">
-                        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                            <img class="w-full" src="{{ asset('storage/img/tienda.svg') }}" alt="Sunset in the mountains">
-                            <div class="px-6 py-4">
-                                <div class="font-bold text-xl mb-2">Productos</div>
-                                <p class="text-gray-700 text-base">
-                                    En esta opción puedes gestionar los productos de la tienda.
-                                </p>
+                    @role('admin')
+                        <a href="{{ route('store') }}">
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/tienda.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Productos</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar los productos de la tienda.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar productos</span>
+                                </div>
                             </div>
-                            <div class="px-6 pt-4 pb-2">
-                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar productos</span>
+                        </a>
+                        <a href="{{ route('orders') }}">
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/pedido.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Pedidos</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar y ver los productos comprados en la tienda.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                        <a href="{{ route('orders.product.index') }}">
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/pedidoPer.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Pedidos personalizados</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar y ver los pedidos personalizados.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos personalizados</span>
+                                </div>
+                            </div>
+                        </a>
+                    @endrole
+                    @role('user')
+                        <a href="{{ route('orders') }}">
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/pedido.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Pedidos</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar y ver los productos comprados en la tienda.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ route('orders.product.index') }}">
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/pedidoPer.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Pedidos personalizados</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar y ver los pedidos personalizados.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos personalizados</span>
+                                </div>
+                            </div>
+                        </a>
+                    @endrole
+                    @role('artista')
                     <a href="{{ route('orders') }}">
-                        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                            <img class="w-full" src="{{ asset('storage/img/pedido.svg') }}" alt="Sunset in the mountains">
-                            <div class="px-6 py-4">
-                                <div class="font-bold text-xl mb-2">Pedidos</div>
-                                <p class="text-gray-700 text-base">
-                                    En esta opción puedes gestionar y ver los productos comprados en la tienda.
-                                </p>
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/pedido.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Pedidos</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar y ver los productos comprados en la tienda.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos</span>
+                                </div>
                             </div>
-                            <div class="px-6 pt-4 pb-2">
-                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos</span>
-                            </div>
-                        </div>
                     </a>
                     <a href="{{ route('orders.product.index') }}">
-                        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                            <img class="w-full" src="{{ asset('storage/img/pedidoPer.svg') }}" alt="Sunset in the mountains">
-                            <div class="px-6 py-4">
-                                <div class="font-bold text-xl mb-2">Pedidos personalizados</div>
-                                <p class="text-gray-700 text-base">
-                                    En esta opción puedes gestionar y ver los pedidos personalizados.
-                                </p>
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img class="w-full" src="{{ asset('storage/img/pedidoPer.svg') }}" alt="Sunset in the mountains">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2">Pedidos personalizados</div>
+                                    <p class="text-gray-700 text-base">
+                                        En esta opción puedes gestionar y ver los pedidos personalizados.
+                                    </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos personalizados</span>
+                                </div>
                             </div>
-                            <div class="px-6 pt-4 pb-2">
-                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Clic para gestionar pedidos personalizados</span>
-                            </div>
-                        </div>
                     </a>
+                    @endrole
                 </main>
             </div>
         </div>

@@ -25,6 +25,32 @@
             justify-content: space-between;
             height: 100%;
         }
+        .login-alert {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .login-alert h1 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .login-alert button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: #fff;
+            background: #120A33;
+            text-decoration: none;
+        }
+        .login-alert button:hover {
+            background: #4f5d75;
+        }
     </style>
 </head>
 <body class="h-screen overflow-hidden">
@@ -37,15 +63,24 @@
                         <img src="{{ asset('storage/img/logo.png') }}" class="h-20">
                     </a>
                 </div>
-                <input class="hidden" type="checkbox" id="menu-toggle" />
-                <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
                     @include('components/nav_landing')
-                </div>
             </header>
             <main>
                 <div class="container px-5 py-24 mx-auto">
+                    @if(!Auth::check())
+                    <div class="login-alert">
+                        <h1>Debes iniciar sesión o registrarte para comprar</h1>
+                        <a href="{{ route('login') }}">
+                            <button>
+                                <i class="fas fa-sign-in-alt mr-2"></i> Iniciar sesión
+                            </button>
+                        </a>
+                    </div>
+                    @endif
                     <a href="{{ route('buysPersonalized') }}">
-                        <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Quiero realizar una compra personalizada.</button>
+                        <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Quiero realizar una compra personalizada.
+                        </button>
                     </a>
                     <div class="flex flex-wrap justify-center">
                         @foreach($products as $product)
@@ -62,10 +97,14 @@
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <span class="text-3xl font-bold text-gray-900 dark:text-white">$ {{ $product->price }}</span>
-                                        <form action="{{ route('addToCart', $product->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregar al carrito +</button>
-                                        </form>
+                                        @if(Auth::check())
+                                            <form action="{{ route('addToCart', $product->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                    Agregar al carrito +
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -75,5 +114,13 @@
             </main>
         </div>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

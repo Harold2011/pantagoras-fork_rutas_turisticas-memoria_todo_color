@@ -1,4 +1,3 @@
-<!-- resources/views/product.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,6 @@
             background-attachment: fixed;
             background-position: center;
         }
-
         /* Estilos para el modal */
         .modal-container {
             display: none;
@@ -28,7 +26,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
             background-color: #fff;
             max-width: 50%;
@@ -42,18 +39,42 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal-content img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
         }
-
         .close-modal {
             position: absolute;
             top: 5px;
             right: 5px;
             cursor: pointer;
+        }
+        .login-alert {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .login-alert h1 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .login-alert button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: #fff;
+            background: #120A33;
+            text-decoration: none;
+        }
+        .login-alert button:hover {
+            background: #4f5d75;
         }
     </style>
 </head>
@@ -67,13 +88,20 @@
                         <img src="{{ asset('storage/img/logo.png') }}" class="h-20">
                     </a>
                 </div>
-                <input class="hidden" type="checkbox" id="menu-toggle" />
-                <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
                     @include('components/nav_landing')
-                </div>
             </header>
             <main>
                 <div class="container px-5 py-24 mx-auto">
+                    @if(!Auth::check())
+                    <div class="login-alert">
+                        <h1>Debes iniciar sesión o registrarte para comprar</h1>
+                        <a href="{{ route('login') }}">
+                            <button>
+                                <i class="fas fa-sign-in-alt mr-2"></i> Iniciar sesión
+                            </button>
+                        </a>
+                    </div>
+                    @endif
                     <section class="text-gray-600 body-font overflow-hidden">
                         <div class="container px-5 py-24 mx-auto">
                             <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -88,10 +116,12 @@
                                     <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
                                     <div class="flex">
                                         <span class="title-font font-medium text-2xl text-gray-50">${{ $product->price }}</span>
+                                        @if(Auth::check())
                                         <form action="{{ route('addToCart', $product->id) }}" method="POST" class="m-5 w-full">
                                             @csrf
                                             <button type="submit" class="bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">+ Agregar al carrito</button>
                                         </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +138,14 @@
             <img src="{{ asset('storage/'.$product->url) }}" alt="Modal Image">
         </div>
     </div>
-
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    
         const modal = document.getElementById('modal');
         const modalClose = document.getElementById('modal-close');
         const productImg = document.getElementById('product-image');

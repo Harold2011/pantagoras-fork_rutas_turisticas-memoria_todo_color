@@ -14,6 +14,10 @@ class LandingController extends Controller
     public function welcome(){
         return view('welcome');
     }
+
+    public function app(){
+        return view('app');
+    }
     
     public function gallery(){
         $gallery = Gallery::all();

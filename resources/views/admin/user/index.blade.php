@@ -45,6 +45,12 @@
                                     <input type="file" id="profile_photo_path" name="profile_photo_path" accept="image/*" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="Imagen actual" class="mt-2 h-32">
                                 </div>
+                        
+                                <div class="mb-4">
+                                    <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
+                                    <input type="text" id="description" name="description" value="{{ $user->description }}" maxlength="255" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                </div>
+
                                 <div class="mb-4">
                                     <label for="instagram" class="block text-sm font-medium text-gray-700">Instagram</label>
                                     <input type="text" id="instagram" name="instagram" value="{{ $user->instagram }}" maxlength="200" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">

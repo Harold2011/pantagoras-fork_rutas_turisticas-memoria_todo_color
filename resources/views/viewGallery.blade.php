@@ -44,10 +44,7 @@
                         <img src="{{ asset('storage/img/logo.png') }}" class="h-20">
                     </a>
                 </div>
-                <input class="hidden" type="checkbox" id="menu-toggle" />
-                <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
-                    @include('components/nav_landing')
-                </div>
+                    @include('components.nav_landing')
             </header>
             <main>
             <div class="overflow-auto grid grid-cols-2 gap-4 p-10">
@@ -79,5 +76,13 @@
     </div>
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

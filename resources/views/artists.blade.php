@@ -25,10 +25,7 @@
                         <img src="{{ asset('storage/img/logo.png') }}" class="h-20">
                     </a>
                 </div>
-                <input class="hidden" type="checkbox" id="menu-toggle" />
-                <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
                     @include('components/nav_landing')
-                </div>
             </header>
             <main>
                 <section class="text-gray-600 body-font">
@@ -45,7 +42,7 @@
                                 <div class="w-full">
                                 <h2 class="title-font font-medium text-lg text-gray-100">{{ $users->name }}</h2>
                                 <h3 class="text-gray-100 mb-3">Biografia</h3>
-                                <p class="mb-4 text-gray-100">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                                <p class="mb-4 text-gray-100">{{ $users->description }}</p>
                                 <span class="inline-flex">
                                     @if(!empty($users->instagram))
                                         <a href="{{ $users->instagram }}" target="_blank" class="text-gray-100">
@@ -84,5 +81,13 @@
             </main> 
         </div>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

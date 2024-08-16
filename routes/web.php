@@ -19,6 +19,9 @@ Route::get('/', function () {
 });
 Route::get('/welcome', [LandingController::class, 'welcome'])->name('welcome');
 
+//rutas app
+Route::get('/app', [LandingController::class, 'app'])->name('app');
+
 //rutas galeria
 Route::get('/gallery', [LandingController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/{id}', [LandingController::class, 'viewGallery'])->name('viewGallery');
