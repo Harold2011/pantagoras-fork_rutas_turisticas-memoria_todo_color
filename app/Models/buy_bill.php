@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\buys;
+use App\Models\Buys;
 
 class buy_bill extends Model
 {
@@ -15,12 +15,12 @@ class buy_bill extends Model
 
     public function bill()
     {
-        return $this->belongsTo(Bill::class, 'bill_id');
+        return $this->belongsTo(bill::class, 'bill_id');
     }
 
     public function buys()
     {
-        return $this->belongsTo(buys::class, 'buy_id')->with('product');
+        return $this->belongsTo(Buys::class, 'buy_id')->with('product');
     }
 
     public function user()

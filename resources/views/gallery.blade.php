@@ -29,7 +29,7 @@
             </header>
             <main>
                 <div class="flex flex-col items-center justify-center w-full mb-20">
-                    <h1 class="text-2xl font-medium title-font mb-4 text-gray-100">Conose San Carlos</h1>
+                    <h1 class="text-2xl font-medium title-font mb-4 text-gray-100">Conoce San Carlos</h1>
                     <video class="rounded" width="640" height="480" autoplay muted loop>
                         <source src="{{ asset('storage/img/SAN_CARLOS.mp4')}}" type="video/mp4">
                         Tu navegador no soporta la etiqueta de video.
@@ -48,7 +48,7 @@
                         </a>
                         @endforeach
                 </div>
-            </main> 
+            </main>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

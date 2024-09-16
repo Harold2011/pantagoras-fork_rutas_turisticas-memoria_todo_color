@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\gallery;
+use App\Models\Gallery;
 use App\Models\state;
 use App\Models\Multimedia;
 use App\Models\User;
@@ -19,14 +19,14 @@ class GalleryController extends Controller
     }
 
     public function imageRegister(){
-        $gallery = gallery::all();
+        $gallery = Gallery::all();
         $state = state::all();
         $user = User::role('artista')->get();
         return view('admin.content.registerImage', compact('gallery', 'state', 'user'));
     }
     public function galleryRegister(){
         $state = state::all();
-        
+
         return view('admin.content.registerGallery', compact('state'));
     }
     public function galleryStore(Request $request){
@@ -80,23 +80,23 @@ class GalleryController extends Controller
     }
 
     public function edit($id) {
-        $gallery = gallery::find($id);
+        $gallery = Gallery::find($id);
         $state = State::all();
         return view('admin.content.editGallery', compact('gallery', 'state'));
     }
-    
+
     public function update(Request $request, $id) {
-        $gallery = gallery::find($id);
+        $gallery = Gallery::find($id);
         $gallery->name = $request->input('name');
         $gallery->description = $request->input('description');
-    
+
         if ($request->hasFile('url')) {
             $gallery->url = $request->file('url')->store('images', 'public');
         }
-        
+
         $gallery->status_id = $request->input('status_id');
         $gallery->save();
-        
+
         return redirect()->route('galleryAdmin')->with('success', 'Registro actualizado correctamente');
     }
 
@@ -129,7 +129,7 @@ class GalleryController extends Controller
         }
         return redirect()->route('galleryAdmin')->with('error', 'Imagen no encontrada');
     }
-    
+
     public function editImage($id) {
         $image = Multimedia::find($id);
         $gallery = Gallery::all();
@@ -137,25 +137,25 @@ class GalleryController extends Controller
         $user = User::role('artista')->get();
         return view('admin.content.editImage', compact('image', 'gallery', 'state', 'user'));
     }
-    
+
     public function updateImage(Request $request, $id) {
         $image = Multimedia::find($id);
         $image->name = $request->input('name');
         $image->description = $request->input('description');
-    
+
         if ($request->hasFile('url')) {
             Storage::disk('public')->delete($image->url);
             $image->url = $request->file('url')->store('images', 'public');
         }
-    
+
         $image->status_id = $request->input('status_id');
         $image->gallery_id = $request->input('gallery_id');
         $image->user_id = $request->input('user_id');
         $image->save();
-    
+
         return redirect()->route('galleryAdmin')->with('success', 'Imagen actualizada correctamente');
     }
-    
+
     public function destroyImage($id) {
         $image = Multimedia::find($id);
         if ($image) {
@@ -164,5 +164,5 @@ class GalleryController extends Controller
             return redirect()->route('galleryAdmin')->with('success', 'Imagen eliminada correctamente');
         }
         return redirect()->route('galleryAdmin')->with('error', 'Imagen no encontrada');
-    }    
+    }
 }

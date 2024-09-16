@@ -31,7 +31,7 @@
                 <section class="text-gray-600 body-font">
                     <div class="container px-5 py-24 mx-auto">
                       <div class="flex flex-col text-center w-full mb-20">
-                        <h1 class="text-2xl font-medium title-font mb-4 text-gray-100">Conose los artistas que pintan sancarlos</h1>
+                        <h1 class="text-2xl font-medium title-font mb-4 text-gray-100">Conoce los artistas que pintan sancarlos</h1>
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-100">Sigue las redes sociales de estos artistas y enterate de lo que hacen.</p>
                       </div>
                       <div class="flex flex-wrap -m-4">
@@ -78,7 +78,7 @@
                       </div>
                     </div>
                   </section>
-            </main> 
+            </main>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

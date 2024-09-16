@@ -42,7 +42,7 @@
             </a>
             <a href="{{ route('storeNav') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-shopping-cart mr-3"></i>
-                Compras
+                Compra
             </a>
             <a href="{{ route('welcome') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-globe mr-3"></i>
