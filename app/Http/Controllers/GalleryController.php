@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gallery;
-use App\Models\state;
-use App\Models\Multimedia;
 use App\Models\User;
+use App\Models\State;
+use App\Models\Gallery;
+use App\Models\Multimedia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
@@ -20,12 +20,12 @@ class GalleryController extends Controller
 
     public function imageRegister(){
         $gallery = Gallery::all();
-        $state = state::all();
+        $state = State::all();
         $user = User::role('artista')->get();
         return view('admin.content.registerImage', compact('gallery', 'state', 'user'));
     }
     public function galleryRegister(){
-        $state = state::all();
+        $state = State::all();
 
         return view('admin.content.registerGallery', compact('state'));
     }

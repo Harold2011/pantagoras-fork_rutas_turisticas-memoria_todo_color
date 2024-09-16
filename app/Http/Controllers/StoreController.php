@@ -8,13 +8,13 @@ use App\Models\category;
 use App\Models\products;
 use App\Models\buy_bill;
 use App\Models\bill;
-use App\Models\buys;
+use App\Models\Buys;
 use App\Models\User;
 
 class StoreController extends Controller
 {
     public function storeNav(){
-        
+
         return view('admin.store.index');
     }
 
@@ -25,7 +25,7 @@ class StoreController extends Controller
 
     public function registerProduct(){
         $category = category::all();
-        $state = state::all();
+        $state = State::all();
         return view('admin.store.registerProduct', compact('category', 'state'));
     }
     public function productStore(Request $request){
@@ -72,10 +72,10 @@ class StoreController extends Controller
     public function toggleProductStatus($id)
     {
         $product = products::find($id);
-        
+
         if ($product) {
             $newStateId = $product->status_id == 1 ? 2 : 1;
-            
+
             $newState = State::find($newStateId);
             if ($newState) {
                 $product->status_id = $newState->id;
@@ -85,7 +85,7 @@ class StoreController extends Controller
                 return redirect()->route('store')->with('error', 'Estado no encontrado');
             }
         }
-        
+
         return redirect()->route('store')->with('error', 'Producto no encontrado');
     }
 
@@ -94,7 +94,7 @@ class StoreController extends Controller
         $product = products::findOrFail($id);
         $states = State::all();
         $categories = Category::all();
-        
+
         return view('admin.store.editProduct', compact('product', 'states', 'categories'));
     }
 
@@ -151,7 +151,7 @@ class StoreController extends Controller
         return view('admin.store.ordersProduct', compact('orders'));
     }
 
-    
+
     public function showBill($id)
     {
         $bill = bill::with('buyBills.buys')->findOrFail($id);

@@ -25,7 +25,7 @@ class routesController extends Controller
 
     public function registerRoute()
     {
-        $state = state::all();
+        $state = State::all();
 
         return view('admin.route.register', compact('state'));
     }
@@ -79,10 +79,10 @@ class routesController extends Controller
 
         return view('admin.route.edit', compact('state', 'routes'));
     }
-    
+
     public function updateRoute(Request $request, $id) {
         $route = route::find($id);
-    
+
         if ($request->hasFile('url')) {
             Storage::disk('public')->delete($route->url);
             $route->url = $request->file('url')->store('images', 'public');
@@ -92,7 +92,7 @@ class routesController extends Controller
         $route->contact = $request->input('contact');
         $route->status_id = $request->input('status_id');
         $route->save();
-    
+
         return redirect()->route('indexRoute')->with('success', 'Ruta actualizada correctamente');
     }
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-Use App\Models\state;
+Use App\Models\State;
 
 class StateSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class StateSeeder extends Seeder
         ];
 
         foreach ($states as $state){
-            state::create($state);
+            State::create($state);
         }
     }
 }
