@@ -91,6 +91,11 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product removed from cart!');
     }
 
+//  TODO AGREGAR AL FORMULARIO  de envio de mensajes a whatsapp un chulo que acepta que le manden mensajes.
+//  8. Opt-In Consent
+//  WhatsApp requires businesses to obtain user consent before sending messages. 
+//  Ensure you have a clear opt-in process that lets customers agree to receive WhatsApp messages from your business.
+
     public function handlePayuResponse(Request $request)
     {
         $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
