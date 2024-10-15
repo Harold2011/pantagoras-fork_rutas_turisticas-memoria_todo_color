@@ -43,6 +43,7 @@ Route::put('/cart/update/{product}', [CartController::class, 'updateCart'])->nam
 Route::delete('/cart/remove/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::get('/response', [CartController::class, 'handlePayuResponse'])->name('response');
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handlePayment');
+Route::post('/showWhatsAppContactForm', [CartController::class, 'showWhatsAppContactForm'])->name('showWhatsAppContactForm');
 
 //Ruta de mensaje
 Route::post('/contacto', [menssajeController::class, 'store'])->name('contacto.store');
@@ -92,7 +93,7 @@ Route::middleware([
     Route::get('/bill/{id}', [StoreController::class, 'showBill'])->name('bill.show');
     Route::get('/orders-product', [productsPersonalizedController::class, 'index'])->name('orders.product.index');
     Route::get('/toggle-status/{id}', [ProductsPersonalizedController::class, 'toggleStatus'])->name('toggle.status');
-
+    
     // Rutas mensajes
     Route::get('/indexMessage', [menssajeController::class, 'indexMenssage'])->name('indexMessage');
     Route::delete('/message/delete/{id}', [menssajeController::class, 'destroy'])->name('message.destroy');
