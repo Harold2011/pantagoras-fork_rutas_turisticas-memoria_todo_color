@@ -62,7 +62,8 @@ class CartController extends Controller
         $apiKey = '4Vj8eK4rloUd272L48hsrarnUA';
         $signature = md5($apiKey . '~' . $merchantId . '~' . $referenceCode . '~' . number_format($totalAmount, 1, '.', '') . '~' . $currency);
 
-        return view('cart', compact('cartItems', 'totalAmount', 'merchantId', 'accountId', 'description', 'referenceCode', 'tax', 'taxReturnBase', 'currency', 'confirmationUrl', 'responseUrl', 'signature', 'test'));
+        return view('cart', compact('cartItems', 'totalAmount', 'merchantId', 'accountId', 'description', 'referenceCode', 'tax', 'taxReturnBase', 'currency', 'confirmationUrl', 'responseUrl', 'signature', 'test')
+        );
     }
 
     public function updateCart(Request $request, $productId)
@@ -95,6 +96,27 @@ class CartController extends Controller
 //  8. Opt-In Consent
 //  WhatsApp requires businesses to obtain user consent before sending messages. 
 //  Ensure you have a clear opt-in process that lets customers agree to receive WhatsApp messages from your business.
+
+    public function showWhatsAppContactForm()
+    {
+        // mensaje predefiniido de de whatsapp
+        $wpMessage=" Hola, me comunico porque estoy interesado en obtener más información de estos productos: %0a";
+        $wpAdminReceiverPhoneNumber=env('WHATSAPP_RECEIVER_PHONE_NUMBER');
+        $cartItems = session('cart');
+        
+        if (!empty($cartItems)) {
+            foreach ($cartItems as $item) {
+                $wpMessage .= 
+                    '%0a producto: ' . $item["name"] . 
+                    '%0a precio: ' . $item["price"] .
+                    '%0a cantidad: ' . $item["quantity"];
+            }
+            $wpMessage .= '%0a';
+        }
+        $wpMessage .= '%0a Muchas Gracias';
+        //dd($wpMessage);
+        return view('sendWhatsAppMessage', compact('wpMessage','wpAdminReceiverPhoneNumber'));
+    }
 
     public function handlePayuResponse(Request $request)
     {

@@ -10,6 +10,7 @@
 ## Instalation instructions
 
 - create a copy of .env.example file named .env.
+- Setup the whatsapp receive number in your .env file example +57 3024442222 is WHATSAPP_RECEIVER_PHONE_NUMBER=573024442222
 - Run composer install
 - Run npm install and npm audit fix incase its needed
 - Run npm run build 
@@ -17,6 +18,7 @@
 - Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration.
 - Run php artisan migrate
 - Run php artisan db:seed
+- Run php artisan storage:link to create a link for the photo upload folder into app/public/storage
 - Run php artisan serve 
 - go to http://localhost:8000/
 
