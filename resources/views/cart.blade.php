@@ -98,6 +98,14 @@
                             </form>
                         @endif
                         </div>
+                         <!-- Para manejar el contacto a WhatsApp -->
+                        <div class="flex justify-between mx-4 mt-10">
+                            <form method="post" action="{{ route('showWhatsAppContactForm') }}" class="flex items-center">
+                            @csrf
+                            <button type="submit" class="p-4 bg-[#120A33] text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2"
+                                >Contactar a WhatsApp</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
