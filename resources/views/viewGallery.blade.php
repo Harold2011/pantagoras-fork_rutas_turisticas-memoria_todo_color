@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>galeria</title>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <title>Galeria</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js" defer></script>
     @vite('resources/css/app.css')
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
         .background-fixed {
-            background-image: url('{{ asset('storage/img/fondo.png') }}');
+            background-image: url('{{ asset('storage/img/fondo3.jpg') }}');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -32,11 +32,15 @@
             justify-content: center;
             flex-direction: column;
         }
+
+        .overlay {
+            background-color: rgba(50, 50, 50, 0.7);
+        }
     </style>
 </head>
 <body class="h-screen overflow-hidden" x-data="{ showModal: false, modalImage: '' }">
     <div class="background-fixed fixed inset-0"></div>
-    <div class="relative w-full h-full bg-no-repeat bg-cover bg-center bg-shadow bg-opacity-75">
+    <div class="relative w-full h-full bg-no-repeat bg-cover bg-center overlay"> <!-- Aplicamos la overlay aquí -->
         <div class="content relative z-10 h-full overflow-auto">
             <header class="lg:px-16 px-4 flex flex-wrap items-center py-4">
                 <div class="flex-1 flex justify-between items-center">
@@ -44,22 +48,21 @@
                         <img src="{{ asset('storage/img/logo.png') }}" class="h-20">
                     </a>
                 </div>
-                    @include('components.nav_landing')
+                @include('components.nav_landing')
             </header>
             <main>
-            <div class="overflow-auto grid grid-cols-2 gap-4 p-10">
-                        <a href="{{ route('gallery')}}"><button class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            <i class="fas fa-arrow-alt-circle-left mr-3"></i> Regresar
-                        </button></a>
-                    </div>
+                <div class="overflow-auto grid grid-cols-2 gap-4 p-10">
+                    <a href="{{ route('gallery')}}"><button class="p-10 bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <i class="fas fa-arrow-alt-circle-left mr-3"></i> Regresar
+                    </button></a>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                     @foreach ($multimedia as $media)
                         <div class="relative rounded overflow-hidden shadow-lg bg-white cursor-pointer image-container" @click="modalImage = '{{ asset('storage/'.$media->url) }}'; showModal = true">
                             <img src="{{ asset('storage/'.$media->url) }}" alt="Multimedia Image" class="w-full h-64 object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
+                            <div class="px-10 absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
                                 <p class="text-2xl">{{ $media->name }}</p>
                                 <p class="text-lg">{{ $media->description }}</p>
-                                <p class="text-sm mt-2">Artista: {{ $media->user->name }}</p>
                             </div>
                         </div>
                     @endforeach

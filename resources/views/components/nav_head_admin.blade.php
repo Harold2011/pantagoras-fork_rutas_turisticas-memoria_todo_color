@@ -6,10 +6,10 @@
         </button>
         <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
         <div x-show="isOpen" class="absolute max-w-auto bg-white rounded-lg shadow-lg py-2 mt-16">
-            <a href="{{ route('personal.edit', Auth::user()->id) }}" class="block text-sm px-4 py-2 account-link hover:text-white">Actualizar datos</a>
+            <a href="{{ route('personal.edit', Auth::user()->id) }}" class="block text-sm px-4 py-2 account-link hover:bg-[#34482D] hover:text-white">Actualizar datos</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <a class="block text-sm px-4 py-2 account-link hover:text-white"><button>Cerrar sesión</button></a>
+                <a class="block text-sm px-4 py-2 account-link hover:bg-[#34482D] hover:text-white"><button>Cerrar sesión</button></a>
             </form>
         </div>
     </div>
@@ -28,7 +28,7 @@
     <!-- Dropdown Nav -->
     <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
     @role('admin')
-            <a href="{{ route('dashboard') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ route('dashboard') }}" class="flex items-center text-white opacity-75 hover:opacity-100 hover:bg-[#34482D] py-4 pl-6 nav-item">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Panel de control
             </a>

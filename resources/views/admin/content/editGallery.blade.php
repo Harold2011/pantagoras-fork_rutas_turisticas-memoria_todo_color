@@ -53,7 +53,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <button type="submit" class="w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="submit" class="w-full bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Actualizar
                                     </button>
                                 </div>

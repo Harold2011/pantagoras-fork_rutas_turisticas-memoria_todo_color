@@ -33,7 +33,7 @@
                     @endif
                     <div class="bg-white overflow-auto grid grid-cols-1 gap-4 p-10">
                         <table class="min-w-full bg-white mt-4">
-                            <thead class="bg-gray-800 text-white">
+                            <thead class=" bg-[#34482D] text-white">
                                 <tr>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">ID Ruta</th>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
@@ -85,7 +85,7 @@
                 </div>
             </main>
             <footer class="w-full bg-white text-right p-4">
-                <a target="_blank" href="" class="underline">Memoria todo color 2024.</a>.
+                <a target="_blank" href="" class="underline">Pantágoras 2024.</a>.
             </footer>
         </div>
     </div>

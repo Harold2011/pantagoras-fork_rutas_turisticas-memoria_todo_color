@@ -8,16 +8,20 @@
     @vite('resources/css/app.css')
     <style>
         .background-image {
-            background-image: url('{{ asset('storage/img/background.gif') }}');
+            background-image: url('{{ asset('storage/img/background.jpg') }}');
             background-size: cover; /* La imagen cubrirá toda la pantalla */
             background-position: center; /* La imagen estará centrada */
             background-repeat: no-repeat; /* Evita que la imagen se repita */
             background-attachment: fixed; /* La imagen de fondo se mantendrá fija mientras se desplaza el contenido */
         }
+        /* Superposición con color humo más fuerte */
+        .overlay {
+            background-color: rgba(50, 50, 50, 0.7); /* Gris oscuro con opacidad del 70% */
+        }
     </style>
 </head>
 <body class="min-h-screen">
-    <div class="relative w-full min-h-screen bg-shadow background-image">
+    <div class="relative w-full min-h-screen bg-shadow background-image overlay">
         <div class="content">
             <header class="lg:px-16 px-4 flex flex-wrap items-center py-4">
                 <div class="flex-1 flex justify-between items-center">
@@ -30,33 +34,27 @@
             <div class="w-[90%] mx-auto h-full flex items-center justify-between py-10">
                 <div class="lg:w-[20%]">
                     <div class="sm:text-6xl xs:text-5xl text-white text-left uppercase">
-                        <h1 class="font-mono">Descubre San Carlos Con Realidad Aumentada</h1>
+                        <h1 class="font-mono">Pantágoras, Aventura ancestral y biodiversa.</h1>
                     </div>
-                    <a href="{{ route('storeUser') }}">
-                        <div class="w-full flex items-center justify-between mt-10 py-1 px-4 uppercase bg-yellow-500 rounded-sm shadow-md">
-                            <h3 class="text-white text-lg font-semibold">Productos</h3>
-                            <div class="w-[40%] flex items-center text-gray-700 text-4xl gap-0">
-                                <hr class="w-full border border-gray-700 relative -right-3" />
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </div>
-                        </div>
-                    </a>
                 </div>
 
                 <div>
                     <ul class="text-2xl text-gray-700">
                         <li class="px-1 bg-white/50 rounded-full">
-                            <ion-icon name="logo-facebook"></ion-icon>
+                            <a href="https://www.facebook.com/pantagoras.cultura/" target="_blank">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
                         </li>
-                        <li class="px-1 bg-white/50 rounded-full mt-2">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </li>
-                        <li class="px-1 bg-white/50 rounded-full mt-2">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                        </li>
-                        <li class="px-1 bg-white/50 rounded-full mt-2">
-                            <ion-icon name="person-circle-outline"></ion-icon>
-                        </li>
+                        <a href="https://www.instagram.com/nature_pantagoras/?__d=11" target="_blank">
+                            <li class="px-1 bg-white/50 rounded-full mt-2">
+                                <ion-icon name="logo-instagram"></ion-icon>
+                            </li>
+                        </a>
+                        <a href="https://wa.me/573117034930?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20productos" target="_blank">
+                            <li class="px-1 bg-white/50 rounded-full mt-2">
+                                <ion-icon name="logo-whatsapp"></ion-icon>
+                            </li>
+                        </a>                        
                     </ul>
                 </div>
             </div>

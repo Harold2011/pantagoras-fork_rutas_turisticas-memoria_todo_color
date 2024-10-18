@@ -10,5 +10,5 @@ class route extends Model
     use HasFactory;
 
     protected $table = 'route';
-    protected $fillable = ['name', 'description', 'contact', 'url', 'status_id'];
+    protected $fillable = ['name', 'description', 'contact', 'url', 'pdf_url', 'status_id'];
 }

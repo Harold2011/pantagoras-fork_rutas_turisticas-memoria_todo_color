@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .background-fixed {
-            background-image: url('{{ asset('storage/img/fondo.png') }}');
+            background-image: url('{{ asset('storage/img/fondo3.jpg') }}');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -51,11 +51,14 @@
         .login-alert button:hover {
             background: #4f5d75;
         }
+        .overlay {
+            background-color: rgba(50, 50, 50, 0.7);
+        }
     </style>
 </head>
 <body class="h-screen overflow-hidden">
     <div class="background-fixed fixed inset-0"></div>
-    <div class="relative w-full h-full bg-no-repeat bg-cover bg-center bg-shadow bg-opacity-75">
+    <div class="relative w-full h-full bg-no-repeat bg-cover bg-center overlay bg-opacity-75">
         <div class="content relative z-10 h-full overflow-auto">
             <header class="lg:px-16 px-4 flex flex-wrap items-center py-4">
                 <div class="flex-1 flex justify-between items-center">
@@ -67,21 +70,6 @@
             </header>
             <main>
                 <div class="container px-5 py-24 mx-auto">
-                    @if(!Auth::check())
-                    <div class="login-alert">
-                        <h1>Debes iniciar sesión o registrarte para comprar</h1>
-                        <a href="{{ route('login') }}">
-                            <button>
-                                <i class="fas fa-sign-in-alt mr-2"></i> Iniciar sesión
-                            </button>
-                        </a>
-                    </div>
-                    @endif
-                    <a href="{{ route('buysPersonalized') }}">
-                        <button type="button" class="m-5 w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Quiero realizar una compra personalizada.
-                        </button>
-                    </a>
                     <div class="flex flex-wrap justify-center">
                         @foreach($products as $product)
                             <div class="w-full m-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 product-card">
@@ -100,7 +88,7 @@
                                         @if(Auth::check())
                                             <form action="{{ route('addToCart', $product->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="p-10 bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                <button type="submit" class="p-10 bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                     Agregar al carrito +
                                                 </button>
                                             </form>

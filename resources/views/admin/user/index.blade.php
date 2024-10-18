@@ -64,7 +64,7 @@
                                     <input type="text" id="youtube" name="youtube" value="{{ $user->youtube }}" maxlength="200" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                 </div>
                                 <div>
-                                    <button type="submit" class="w-full bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="submit" class="w-full bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Actualizar
                                     </button>
                                 </div>
@@ -74,7 +74,7 @@
                 </div>
             </main>
             <footer class="w-full bg-white text-right p-4">
-                <a target="_blank" href="" class="underline">Memoria todo color 2024.</a>.
+                <a target="_blank" href="" class="underline">Pantágoras 2024.</a>.
             </footer>
         </div>
     </div>

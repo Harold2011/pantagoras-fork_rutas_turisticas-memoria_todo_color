@@ -41,7 +41,7 @@
                             </p>
                             <div class="bg-white overflow-auto">
                                 <table class="min-w-full bg-white">
-                                    <thead class="bg-gray-800 text-white">
+                                    <thead class="bg-[#34482D] text-white">
                                         <tr>
                                             <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
                                             <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Total</th>
@@ -64,9 +64,9 @@
                 <div class="flex flex-wrap mt-6 justify-center">
                     <div class="w-full lg:w-1/2">
                         <div class="relative">
-                            <img src="{{ asset('storage/img/background.gif') }}" alt="Banner" class="w-full h-auto object-cover rounded-lg">
+                            <img src="{{ asset('storage/img/background.jpg') }}" alt="Banner" class="w-full h-auto object-cover rounded-lg">
                             <div class="absolute inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center rounded-lg">
-                                <h2 class="text-white text-3xl font-bold">Bienvenido a Memoria Todo Color</h2>
+                                <h2 class="text-white text-3xl font-bold">Bienvenido a pantágoras.</h2>
                             </div>
                         </div>
                     </div>
@@ -76,9 +76,9 @@
                 <div class="flex flex-wrap mt-6 justify-center">
                     <div class="w-full lg:w-1/2">
                         <div class="relative">
-                            <img src="{{ asset('storage/img/background.gif') }}" alt="Banner" class="w-full h-auto object-cover rounded-lg">
+                            <img src="{{ asset('storage/img/background.jpg') }}" alt="Banner" class="w-full h-auto object-cover rounded-lg">
                             <div class="absolute inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center rounded-lg">
-                                <h2 class="text-white text-3xl font-bold">Bienvenido a Memoria Todo Color</h2>
+                                <h2 class="text-white text-3xl font-bold">Bienvenido a pantágoras.</h2>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
 
             <!-- Footer -->
             <footer class="w-full bg-white text-right p-4">
-                <a target="_blank" href="" class="underline">Memoria todo color 2024.</a>
+                <a target="_blank" href="" class="underline">Pantágoras 2024.</a>
             </footer>
         </div>
     </div>

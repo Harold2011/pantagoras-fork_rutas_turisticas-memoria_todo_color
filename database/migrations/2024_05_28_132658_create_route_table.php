@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description', 200);
             $table->string('contact', 15);
             $table->string('url', 200);
+            $table->string('pdf_url', 200);
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('state')->onDelete('cascade');
             $table->timestamps();

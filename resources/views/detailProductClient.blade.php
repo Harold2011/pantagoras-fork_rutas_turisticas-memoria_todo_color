@@ -8,12 +8,11 @@
     @vite('resources/css/app.css')
     <style>
         .background-fixed {
-            background-image: url('{{ asset('storage/img/fondo.png') }}');
+            background-image: url('{{ asset('storage/img/fondo3.jpg') }}');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
         }
-        /* Estilos para el modal */
         .modal-container {
             display: none;
             position: fixed;
@@ -39,29 +38,17 @@
             justify-content: center;
             align-items: center;
         }
-        .modal-content img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
         .close-modal {
             position: absolute;
             top: 5px;
             right: 5px;
             cursor: pointer;
         }
-        .login-alert {
-            background: #fff;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
+        /* Personaliza el estilo del alert de login */
         .login-alert h1 {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
-            color: #333;
+            color: #fff; /* Cambiar texto a blanco */
         }
         .login-alert button {
             padding: 0.5rem 1rem;
@@ -70,11 +57,10 @@
             cursor: pointer;
             font-weight: bold;
             color: #fff;
-            background: #120A33;
-            text-decoration: none;
+            background-color: #34482D; /* Color del botón */
         }
         .login-alert button:hover {
-            background: #4f5d75;
+            background-color: #078C03; /* Color del botón en hover */
         }
     </style>
 </head>
@@ -93,41 +79,41 @@
             <main>
                 <div class="container px-5 py-24 mx-auto">
                     @if(!Auth::check())
-                    <div class="login-alert">
-                        <h1>Debes iniciar sesión o registrarte para comprar</h1>
+                    <div class="login-alert bg-opacity-7 rounded-lg p-4">
+                        <h1 class="text-white text-lg font-semibold mb-4">Debes iniciar sesión o registrarte para solicitar los productos o servicios</h1>
                         <a href="{{ route('login') }}">
-                            <button>
+                            <button class="bg-[#34482D] text-white py-2 px-4 rounded-lg hover:bg-[#078C03] transition-colors duration-300">
                                 <i class="fas fa-sign-in-alt mr-2"></i> Iniciar sesión
                             </button>
                         </a>
                     </div>
                     @endif
-                    <section class="text-gray-600 body-font overflow-hidden">
-                        <div class="container px-5 py-24 mx-auto">
-                            <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                                <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto max-h-96 md:h-32 sm:h-24 object-cover object-center rounded cursor-pointer" src="{{ asset('storage/'.$product->url) }}" id="product-image">
-                                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                                    <h2 class="text-sm title-font text-gray-50 tracking-widest">{{ $product->brand }}</h2>
-                                    <h1 class="text-gray-50 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
-                                    <div class="flex mb-4">
-                                        Categoría: {{ $product->category->name }}
-                                    </div>
-                                    <p class="leading-relaxed text-gray-50">{{ $product->description }}</p>
-                                    <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
-                                    <div class="flex">
-                                        <span class="title-font font-medium text-2xl text-gray-50">${{ $product->price }}</span>
-                                        @if(Auth::check())
-                                        <form action="{{ route('addToCart', $product->id) }}" method="POST" class="m-5 w-full">
-                                            @csrf
-                                            <button type="submit" class="bg-[#120A33] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">+ Agregar al carrito</button>
-                                        </form>
-                                        @endif
-                                    </div>
+                </div>                
+                <section class="text-gray-600 body-font overflow-hidden">
+                    <div class="container px-5 mx-auto">
+                        <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                            <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto max-h-96 md:h-32 sm:h-24 object-cover object-center rounded cursor-pointer" src="{{ asset('storage/'.$product->url) }}" id="product-image">
+                            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                                <h2 class="text-sm title-font text-gray-50 tracking-widest">{{ $product->brand }}</h2>
+                                <h1 class="text-gray-50 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
+                                <div class="flex mb-4 text-gray-50">
+                                    Categoría: {{ $product->category->name }}
+                                </div>
+                                <p class="leading-relaxed text-gray-50">{{ $product->description }}</p>
+                                <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
+                                <div class="flex">
+                                    <span class="title-font font-medium text-2xl text-gray-50">${{ $product->price }}</span>
+                                    @if(Auth::check())
+                                    <form action="{{ route('addToCart', $product->id) }}" method="POST" class="m-5 w-full">
+                                        @csrf
+                                        <button type="submit" class="bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">+ Agregar al carrito</button>
+                                    </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </main>
         </div>
     </div>
@@ -145,7 +131,7 @@
             var menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-    
+
         const modal = document.getElementById('modal');
         const modalClose = document.getElementById('modal-close');
         const productImg = document.getElementById('product-image');

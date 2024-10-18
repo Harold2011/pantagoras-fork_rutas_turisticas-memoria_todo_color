@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .background-fixed {
-            background-image: url('{{ asset('storage/img/fondo.png') }}');
+            background-image: url('{{ asset('storage/img/background.jpg') }}');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -41,14 +41,12 @@
             </header>
             <main>
                 <section class="text-gray-600 body-font relative">
-                    <div class="container px-5 py-24 mx-auto">
-                        <div class="flex flex-col text-center w-full mb-12">
-                            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-50">Contactos</h1>
-                            <p class="lg:w-2/3 mx-auto text-gray-50 leading-relaxed text-base">Telefono 311000000.</p>
-                            <p class="lg:w-2/3 mx-auto text-gray-50 leading-relaxed text-base">Correo memoria@gmail.com</p>
+                    <div class="container px-5 py-12 mx-auto"> <!-- Ajusta el valor de py-12 para moverlo más arriba -->
+                        <div class="flex flex-col text-center w-full mb-8">
+                            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-50">Contactos</h1>
                             <p class="lg:w-2/3 mx-auto text-gray-50 leading-relaxed text-base">Envianos un mensaje para contactarte.</p>
                         </div>
-                        <div class="lg:w-1/2 md:w-2/3 mx-auto bg-white rounded-lg shadow-lg p-8">
+                        <div class="lg:w-1/2 md:w-2/3 mx-auto bg-white rounded-lg shadow-lg p-6">
                             <form action="{{ route('contacto.store') }}" method="POST">
                             <div class="flex flex-wrap -m-2">
                             
@@ -78,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
-                                    <button class="flex mx-auto text-white bg-[#120A33] border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Enviar</button>
+                                    <button class="flex mx-auto text-white bg-[#34482D] border-0 py-2 px-8 focus:outline-none hover:bg-[#078C03] rounded text-lg">Enviar</button>
                                 </div>
                             </div>
                             </form>
