@@ -52,6 +52,7 @@ Route::get('/contactoIndex', [menssajeController::class, 'index'])->name('contac
 
 //Ruta de rutas
 Route::get('indexLanding', [routesController::class, 'indexLanding'])->name('indexLanding');
+Route::get('/routes/{id}', [routesController::class, 'show'])->name('routes.show');
 
 Route::middleware([
     'auth:sanctum',

@@ -28,7 +28,7 @@
                     </div>
                     <div class="bg-white overflow-auto grid grid-cols-1 gap-4 p-10">
                         <table class="min-w-full bg-white">
-                            <thead class="bg-gray-800 text-white">
+                            <thead class="bg-[#34482D] text-white">
                                 <tr>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
                                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Correo</th>
@@ -50,12 +50,12 @@
                                             @if($role->id == 3)
                                                 <form action="{{ route('usersMakeUser', $user->id) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="bg-[#120A33] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Convertir en Usuario</button>
+                                                    <button type="submit" class="w-full bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Convertir en Usuario</button>
                                                 </form>
                                             @else
                                                 <form action="{{ route('usersMakeArtist', $user->id) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="bg-[#120A33] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Convertir en Artista</button>
+                                                    <button type="submit" class="w-full bg-[#34482D] text-white font-semibold py-2 rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Convertir en Artista</button>
                                                 </form>
                                             @endif
                                             @endforeach
@@ -68,7 +68,7 @@
                 </div>
             </main>
             <footer class="w-full bg-white text-right p-4">
-                <a target="_blank" href="" class="underline">Memoria todo color 2024.</a>.
+                <a target="_blank" href="" class="underline">Pantágoras 2024.</a>.
             </footer>
         </div>
     </div>

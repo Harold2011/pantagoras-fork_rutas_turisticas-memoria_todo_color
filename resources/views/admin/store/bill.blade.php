@@ -54,7 +54,7 @@
                 <a href="{{ route('orders') }}"><button class="bg-[#120A33] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Volver a Pedidos</button></a>
             </main>
             <footer class="w-full bg-white text-right p-4">
-                <a target="_blank" href="" class="underline">Memoria todo color 2024.</a>.
+                <a target="_blank" href="" class="underline">Pantágoras 2024.</a>.
             </footer>
         </div>
     </div>

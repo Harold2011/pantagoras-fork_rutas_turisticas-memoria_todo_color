@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <style>
         .background-fixed {
-            background-image: url('{{ asset('storage/img/fondo.png') }}');
+            background-image: url('{{ asset('storage/img/fondo3.jpg') }}');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -73,38 +73,20 @@
                         @endforeach
 
                         <div class="flex justify-between mx-4 mt-10">
-                            <a href="{{ route('storeUser') }}" class="flex items-center font-semibold text-indigo-600 text-sm">
-                                <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H432c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16H134.059l72.971-72.971c6.249-6.249 6.249-16.379 0-22.627l-11.314-11.314c-6.249-6.249-16.379-6.249-22.627 0L70.059 244.059c-6.249 6.249-6.249 16.379 0 22.627L173.089 369c6.248 6.249 16.379 6.249 22.627 0l11.314-11.314c6.249-6.249 6.249-16.379 0-22.627L134.059 296z"></path></svg>
+                            <a href="{{ route('storeUser') }}" class="flex items-center font-semibold text-[#34482D] text-sm">
+                                <svg class="fill-current mr-2 text-[#34482D] w-4" viewBox="0 0 448 512"><path d="M134.059 296H432c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16H134.059l72.971-72.971c6.249-6.249 6.249-16.379 0-22.627l-11.314-11.314c-6.249-6.249-16.379-6.249-22.627 0L70.059 244.059c-6.249 6.249-6.249 16.379 0 22.627L173.089 369c6.248 6.249 16.379 6.249 22.627 0l11.314-11.314c6.249-6.249 6.249-16.379 0-22.627L134.059 296z"></path></svg>
                                 Continuar comprando
                             </a>
-                            <form method="post" action="{{ route('handlePayment') }}" class="flex items-center">
+                            <form method="post" action="{{ route('showWhatsAppContactForm') }}" class="flex items-center">
                                 @csrf
-                                <input type="hidden" name="merchantId" value="{{ $merchantId }}">
-                                <input type="hidden" name="accountId" value="{{ $accountId }}">
-                                <input type="hidden" name="description" value="{{ $description }}">
-                                <input type="hidden" name="referenceCode" value="{{ $referenceCode }}">
-                                <input type="hidden" name="amount" value="{{ $totalAmount }}">
-                                <input type="hidden" name="tax" value="{{ $tax }}">
-                                <input type="hidden" name="taxReturnBase" value="{{ $taxReturnBase }}">
-                                <input type="hidden" name="currency" value="{{ $currency }}">
-                                <input type="hidden" name="signature" value="{{ $signature }}">
-                                <input type="hidden" name="test" value="{{ $test }}">
-                                <input type="hidden" name="buyerEmail" value="{{ Auth::user()->email }}">
-                                <input type="hidden" name="responseUrl" value="{{ $responseUrl }}">
-                                <input type="hidden" name="confirmationUrl" value="{{ $confirmationUrl }}">
-                                <input type="text" name="shippingAddress" placeholder="Dirección de envío" class="border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mr-2">
-                                <input type="text" name="shippingCity" placeholder="Ciudad de envío" class="border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                <button type="submit" class="p-4 bg-[#120A33] text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2">Comprar</button>
-                            </form>
+                                <button type="submit" class="p-4 bg-[#34482D] text-white font-semibold rounded-lg shadow-lg hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2"
+                                    >Realizar pedido por WhatsApp</button>
+                                </div>
                         @endif
                         </div>
                          <!-- Para manejar el contacto a WhatsApp -->
                         <div class="flex justify-between mx-4 mt-10">
-                            <form method="post" action="{{ route('showWhatsAppContactForm') }}" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="p-4 bg-[#120A33] text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2"
-                                >Contactar a WhatsApp</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
