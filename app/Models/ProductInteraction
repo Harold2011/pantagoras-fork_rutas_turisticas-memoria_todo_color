@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+Use App\Models\User;
+Use App\Models\products;
+
+// Eeste modelo sirve para llevar cuenta de las interacciones de un usuario 
+// a un producto de la tienda a través de la galería
+class ProductInteraction extends Model
+{
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(products::class, 'product_id');
+    }
+}
