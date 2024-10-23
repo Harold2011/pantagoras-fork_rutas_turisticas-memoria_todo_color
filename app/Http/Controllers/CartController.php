@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\bill;
 use App\Models\buy_bill;
 use App\Models\buys;
+use App\Models\ProductInteraction;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
@@ -110,11 +111,18 @@ class CartController extends Controller
                     '%0a producto: ' . $item["name"] . 
                     '%0a precio: ' . $item["price"] .
                     '%0a cantidad: ' . $item["quantity"];
+
+                // save products as interactions
+                $productInteraction = ProductInteraction::create([
+                    'product_id'  => $item["id"],
+                    'user_id' => auth()->id()]); 
+                //dd($productInteraction );
             }
             $wpMessage .= '%0a';
         }
         $wpMessage .= '%0a Muchas Gracias';
         //dd($wpMessage);
+        
         return view('sendWhatsAppMessage', compact('wpMessage','wpAdminReceiverPhoneNumber'));
     }
 
