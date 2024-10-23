@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 Use App\Models\User;
 Use App\Models\products;
+use App\Models\ProductInteraction;
 
 
 class AdminUserSeeder extends Seeder
@@ -76,6 +77,17 @@ class AdminUserSeeder extends Seeder
             'category_id' => 1,
         ]); 
 
-        
+        $productInteraction = ProductInteraction::create([
+            'product_id'  => $prodCoffe->id,
+            'user_id' => $entrepreneur->id]);
+        $productInteraction2 = ProductInteraction::create([
+            'product_id'  => $prodCookie->id,
+            'user_id' => $entrepreneur->id]);
+        $productInteraction3 = ProductInteraction::create([
+                'product_id'  => $prodCoffe->id,
+                'user_id' => $entrepreneur2->id]);
+        $productInteraction4 = ProductInteraction::create([
+                'product_id'  => $prodCookie->id,
+                'user_id' => $entrepreneur2->id]);      
     }
 }
