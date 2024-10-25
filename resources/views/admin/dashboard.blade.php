@@ -28,7 +28,7 @@
                     <div class="flex flex-wrap mt-6">
                         <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
                             <p class="text-xl pb-3 flex items-center">
-                                <i class="fas fa-chart-bar mr-3"></i> Ventas por Producto
+                                <i class="fas fa-chart-bar mr-3"></i> Interacciones por Producto
                             </p>
                             <div class="p-6 bg-white">
                                 <canvas id="salesChart" width="400" height="200"></canvas>
@@ -37,7 +37,7 @@
                         
                         <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-6 lg:mt-0">
                             <p class="text-xl pb-3 flex items-center">
-                                <i class="fas fa-list mr-3"></i> Lista de ventas
+                                <i class="fas fa-list mr-3"></i> Lista de Interacciones
                             </p>
                             <div class="bg-white overflow-auto">
                                 <table class="min-w-full bg-white">
@@ -48,10 +48,10 @@
                                         </tr>
                                     </thead>
                                     <tbody class="text-gray-700">
-                                        @foreach ($productSales as $sale)
+                                        @foreach ($productInteraction as $product)
                                         <tr>
-                                            <td class="w-1/3 text-left py-3 px-4">{{ $sale->name }}</td>
-                                            <td class="text-left py-3 px-4">{{ $sale->total_sales }}</td>
+                                            <td class="w-1/3 text-left py-3 px-4">{{ $product->product_name }}</td>
+                                            <td class="text-left py-3 px-4">{{ $product->total_count }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -107,10 +107,10 @@
         var salesChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: @json($productSales->pluck('name')),
+                labels: @json($productInteraction->pluck('product_name')),
                 datasets: [{
                     label: 'Ventas Totales',
-                    data: @json($productSales->pluck('total_sales')),
+                    data: @json($productInteraction->pluck('total_count')),
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
