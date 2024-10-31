@@ -120,9 +120,7 @@ class CartController extends Controller
             }
             $wpMessage .= '%0a';
         }
-        $wpMessage .= '%0a Muchas Gracias';
-        //dd($wpMessage);
-        
+        $wpMessage .= '%0a Muchas Gracias';        
         return view('sendWhatsAppMessage', compact('wpMessage','wpAdminReceiverPhoneNumber'));
     }
 

@@ -49,7 +49,9 @@
                                 <a href="{{ asset('storage/' . $route->pdf_url) }}" target="_blank" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#34482D] hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Descargar PDF para mas información
                                 </a>
-                                <a href="https://wa.me/{{ preg_replace('/\D/', '57', $route->contact) }}?text=Hola,%20me%20interesa%20la%20ruta%20{{ urlencode($route->name) }}." 
+                                <!-- Información a la derecha <a href="https://wa.me/{{ preg_replace('/\D/', '57', $route->contact) }}?text=Hola,%20me%20interesa%20la%20ruta%20{{ urlencode($route->name) }}." 
+                                -->  
+                                Información a la derecha <a href="{{ route('routes.save-interaction', $route->id) }}"
                                     target="_blank" 
                                     class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#34482D] hover:bg-[#078C03] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Realizar pedido por WhatsApp

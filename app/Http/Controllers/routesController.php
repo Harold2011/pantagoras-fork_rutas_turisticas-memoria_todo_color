@@ -7,6 +7,7 @@ use App\Models\route;
 use App\Models\state;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+Use App\Models\RouteInteraction;
 
 class routesController extends Controller
 {
@@ -128,5 +129,27 @@ class routesController extends Controller
         $route = route::findOrFail($id);
         return view('route_detail', compact('route'));
     }
+
+    public function saveRouteInteraction($id)
+    {
+        $route = route::findOrFail($id);
+        
+        //check if user is loged in to save route interaction
+        $user_id = auth()->id();
+        if (isset($user_id))
+        {
+            $routeInteraction1 = RouteInteraction::create([
+                'route_id'  => $route->id,
+                'user_id' => auth()->id()]);
+        }
+        
+        //redirect to whatsapp api
+        $message = urlencode(" Hola, me interesa la ruta ". $route->name); // Customize your message
+        $phoneNumber=env('WHATSAPP_RECEIVER_PHONE_NUMBER');
+        $whatsappUrl = "https://api.whatsapp.com/send?phone={$phoneNumber}&text={$message}";
+
+        return redirect()->away($whatsappUrl);
+    }
+
 
 }
