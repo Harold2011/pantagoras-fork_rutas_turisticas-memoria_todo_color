@@ -8,6 +8,9 @@ use Spatie\Permission\Models\Role;
 Use App\Models\User;
 Use App\Models\products;
 use App\Models\ProductInteraction;
+Use App\Models\State;
+Use App\Models\route;
+Use App\Models\RouteInteraction;
 
 
 class AdminUserSeeder extends Seeder
@@ -58,6 +61,7 @@ class AdminUserSeeder extends Seeder
         $entrepreneur->assignRole($entrepreneurRole);
         $entrepreneur2->assignRole($entrepreneurRole);
 
+        //add products and product interactions
         $prodCoffe = products::create([
             'name' => 'Café Colombiano',
             'description' => 'Café de las montañas colombianas.',
@@ -89,5 +93,35 @@ class AdminUserSeeder extends Seeder
         $productInteraction4 = ProductInteraction::create([
                 'product_id'  => $prodCookie->id,
                 'user_id' => $entrepreneur2->id]);      
+
+        //Add routes and route interactions        
+        //find state active
+        $state = State::where('id', 1)
+            ->orWhere('name', 'like', 'acti%') // Replace 'your_string' with the actual string you're searching for
+            ->first();
+        //create routes with previous state
+        $route1 = route::create([
+            'name' => "Ruta Azufral-Tuquerres",
+            'description' => "1 día de caminata, paseo por la montaña, ingreso al volcan, y visita a la laguna verde",
+            'contact' => "3024442222",
+            'url' => "basicSeeds/azufral.jpg",
+            'pdf_url' => "basicSeeds/azufral.pdf",
+            'status_id' => $state->id,
+        ]);
+        $route2 = route::create([
+            'name' => "Ruta Chimangual",
+            'description' => "1 día de caminata, paseo por la montaña, a aguas termales, charla sobre cultura",
+            'contact' => "3024442222",
+            'url' => "basicSeeds/chimangual.jpg",
+            'pdf_url' => "basicSeeds/chimangual.pdf",
+            'status_id' => $state->id,
+        ]);
+        $routeInteraction1 = RouteInteraction::create([
+            'route_id'  => $route1->id,
+            'user_id' => $entrepreneur->id]);
+        $routeInteraction1 = RouteInteraction::create([
+            'route_id'  => $route2->id,
+            'user_id' => $entrepreneur2->id]);
+        
     }
 }
